@@ -1,0 +1,3 @@
+main.css -> https://vendappcdn.freetls.fastly.net/packages/spa/static/system/css/spa.82905be0.css
+fonts.css -> https://vendfrontendassets.freetls.fastly.net/fonts/fonts-v11.css
+navigation.css -> https://vendappcdn.freetls.fastly.net/packages/navigation/static/system/css/navigation.b37df668.css
