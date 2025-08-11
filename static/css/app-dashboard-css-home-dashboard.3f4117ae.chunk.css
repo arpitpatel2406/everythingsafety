@@ -1,0 +1,638 @@
+.ds-hr {
+    border-top: 2px solid var(--ls-color-border-neutral-soft);
+    margin: 0
+}
+
+@media only screen and (max-width:768px) {
+    .ds-hr {
+        display: none
+    }
+}
+
+.ds-card-column {
+    flex-grow: 1;
+    height: 100%
+}
+
+.ds-card-container,
+.ds-card-loading {
+    box-sizing: border-box;
+    flex-grow: 1;
+    max-width: 100%;
+    min-height: 280px
+}
+
+@media only screen and (max-width:480px) {
+
+    .ds-card-container,
+    .ds-card-loading {
+        min-height: 200px
+    }
+}
+
+.ds-card-name--finalized {
+    text-decoration: line-through
+}
+
+.ds-line-chart {
+    margin-left: -16px;
+    padding-bottom: 20px
+}
+
+.signpost-text {
+    border-bottom: 2px solid var(--ls-color-fg-neutral-default);
+    display: inline-block;
+    flex: none;
+    padding-bottom: 8px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content
+}
+
+.ds-card-actions {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start
+}
+
+.ds-discount-chart {
+    margin-left: -16px
+}
+
+@media only screen and (max-width:768px) {
+    .ds-card-badge {
+        flex-direction: row
+    }
+
+    .ds-metrics-col {
+        align-items: flex-start;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        text-align: start
+    }
+
+    .ds-metrics-col .ds-report-metric {
+        flex: 1 1
+    }
+
+    .ds-metrics-col .ds-report-metric:first-child {
+        margin-right: 24px
+    }
+}
+
+.ds-card-label {
+    display: block;
+    min-height: 1.25em
+}
+
+.ds-report-metric-percentage {
+    padding-top: 44px
+}
+
+@media only screen and (max-width:768px) {
+    .ds-report-metric-percentage {
+        padding-top: 0
+    }
+}
+
+.ds-dismissed {
+    animation: dismissed .5s ease-in forwards
+}
+
+@keyframes dismissed {
+    to {
+        opacity: 0;
+        transform: translate3d(0, 200px, 0)
+    }
+}
+
+.performance-meter {
+    background: var(--ls-color-border-neutral-soft);
+    border-radius: 5px;
+    height: 8px;
+    margin-bottom: 12px;
+    width: 100%
+}
+
+.performance-meter-bar {
+    background: var(--ls-color-fg-go-default);
+    border-radius: 5px;
+    height: 8px;
+    max-width: 100%;
+    width: 0
+}
+
+.performance-section {
+    box-sizing: border-box;
+    min-height: 337px
+}
+
+@media only screen and (max-width:480px) {
+    .performance-section-carousel-frame {
+        min-height: 300px;
+        width: 100%
+    }
+}
+
+.performance {
+    box-sizing: initial;
+    flex: 1 1;
+    height: 100%
+}
+
+.performance-content {
+    min-height: 270px
+}
+
+.performance-sales-target {
+    min-height: 100%
+}
+
+.performance-metrics,
+.performance-outlet {
+    height: 100%
+}
+
+.performance-card {
+    min-height: 281px
+}
+
+.ds-recommendation {
+    height: calc(100% + 32px)
+}
+
+.ds-recommendation-image-container {
+    background-position: 50%;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    overflow: hidden;
+    position: relative
+}
+
+.ds-recommendation-image-container--single {
+    border-bottom-left-radius: unset;
+    border-top-left-radius: unset;
+    margin-bottom: 16px;
+    margin-left: 0;
+    margin-top: 0;
+    max-height: 120px
+}
+
+@media only screen and (max-width:480px) {
+    .ds-recommendation-image-container {
+        border-bottom-left-radius: unset;
+        border-top-left-radius: unset;
+        height: 120px;
+        margin-bottom: 16px;
+        margin-left: 0;
+        margin-top: 0
+    }
+}
+
+.ds-recommendation-image {
+    height: 100%;
+    object-fit: contain;
+    object-position: top;
+    width: 100%
+}
+
+.ds-recommendation-content {
+    flex-grow: 1
+}
+
+.ds-recommendation-actions {
+    flex-flow: row wrap;
+    margin-bottom: -12px;
+    margin-right: -4px
+}
+
+.ds-recommendation-actions--single {
+    align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: end;
+    margin-bottom: -12px
+}
+
+.ds-recommendation-actions--with-icon {
+    margin-left: -16px
+}
+
+.ds-recommendation-actions--without-icon {
+    margin-left: -20px
+}
+
+.ds-recommendation-button {
+    padding-top: 8px
+}
+
+@media only screen and (max-width:480px) {
+    .ds-recommendation-button-small {
+        margin-left: 4px;
+        margin-top: 12px
+    }
+}
+
+.ds-recommendation-task-button {
+    margin-left: -12px
+}
+
+.ds-recommendation-summary {
+    display: none
+}
+
+@media only screen and (max-width:480px) {
+    .ds-recommendation-summary {
+        display: block
+    }
+
+    .ds-recommendation-body {
+        display: none
+    }
+}
+
+.ds-period-selector {
+    display: flex;
+    max-width: 410px;
+    white-space: nowrap
+}
+
+.ds-outlet-selector {
+    flex: 1 1;
+    max-width: 450px
+}
+
+.ds-top-bar-container {
+    box-sizing: border-box;
+    min-height: 158px
+}
+
+.ds-top-bar-container .ds-header-short {
+    display: none
+}
+
+.ds-top-bar-container .ds-top-bar-section {
+    padding-bottom: 40px;
+    padding-top: 40px
+}
+
+.ds-top-bar-container .vd-section-container {
+    background: var(--ls-color-bg-neutral-backdrop)
+}
+
+.ds-top-bar-container .ds-header-wide {
+    line-height: normal
+}
+
+.ds-top-bar-container .vd-section--fixed,
+.ds-top-bar-container .vd-section--fixed .vd-section-container {
+    background: var(--ls-color-bg-neutral-top);
+    transition: background .8s ease-out 0s
+}
+
+.ds-top-bar-container .vd-section--fixed .ds-header-short {
+    display: block
+}
+
+.ds-top-bar-container .vd-section--fixed .ds-top-bar-section {
+    padding-bottom: 16px;
+    padding-top: 16px
+}
+
+.ds-top-bar-container .vd-section--fixed .ds-header-wide {
+    display: none
+}
+
+@media only screen and (max-width:1000px) {
+    .ds-top-bar-container .ds-filters {
+        justify-content: space-between
+    }
+
+    .ds-top-bar-container .ds-header-section {
+        align-items: stretch;
+        flex-direction: column;
+        justify-content: space-between
+    }
+
+    .ds-top-bar-container .ds-header {
+        padding-bottom: 16px
+    }
+
+    .ds-top-bar-container .vd-section--fixed .ds-header {
+        display: none
+    }
+}
+
+.ds-things-selector {
+    background: var(--ls-color-bg-neutral-backdrop);
+    display: none
+}
+
+.ds-things-selector .vd-section-container {
+    background: var(--ls-color-bg-neutral-backdrop);
+    margin: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-top: 5px
+}
+
+.ds-things-selector .vd-section--fixed .vd-tabs {
+    box-shadow: none;
+    margin-left: 24px
+}
+
+@media only screen and (max-width:768px) {
+    .ds-things-selector {
+        background: var(--ls-color-bg-neutral-backdrop);
+        display: block
+    }
+}
+
+.ds-things-header {
+    display: inline-block;
+    margin-bottom: 32px;
+    margin-top: 24px
+}
+
+@media only screen and (max-width:768px) {
+    .ds-things-header {
+        display: none
+    }
+}
+
+.ds-things {
+    margin-top: -12px;
+    padding-top: 0 !important
+}
+
+@media only screen and (max-width:768px) {
+    .ds-things {
+        display: none;
+        margin-top: 0;
+        padding-top: 8px !important
+    }
+
+    .ds-things.ds-things--active {
+        display: block
+    }
+}
+
+.ds-things-show-more-cards {
+    margin-bottom: 8px;
+    margin-left: 8px
+}
+
+@media only screen and (max-width:768px) {
+    .ds-things-show-more-cards {
+        display: block;
+        margin-bottom: 8px;
+        margin-left: 0
+    }
+}
+
+.ds-things-to-know-empty {
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 0 12px;
+    text-align: center
+}
+
+.ds-things-to-know-empty-image {
+    display: inline-block;
+    height: 96px;
+    width: 140px
+}
+
+.ds-checkboxes {
+    flex-wrap: wrap
+}
+
+.ds-empty-things-to-do-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column
+}
+
+.ds-empty-things-to-do-container .ds-empty-things-to-do-image {
+    max-width: 250px;
+    width: 100%
+}
+
+@media only screen and (max-width:768px) {
+    .ds-empty-things-to-do-container {
+        margin-top: 24px
+    }
+
+    .ds-card-catalogue-promo-item {
+        flex-direction: row
+    }
+}
+
+.ds-card-catalogue-promo {
+    padding: var(--vd-dialog-spacing)
+}
+
+.ds-card-catalogue-promo-heading {
+    margin-bottom: 16px;
+    text-align: center
+}
+
+.ds-card-catalogue-promo-description {
+    margin: 0 auto 32px;
+    max-width: 30em;
+    text-align: center
+}
+
+.ds-card-catalogue-promo-item-icon {
+    text-align: center;
+    width: 24px
+}
+
+.ds-card-catalogue-promo-link {
+    text-align: center
+}
+
+.hd-header-section {
+    background-color: var(--ls-color-bg-neutral-backdrop)
+}
+
+.hd-header-section .hd-header-short {
+    display: none
+}
+
+.vd-sticky.hd-header-section {
+    background-color: var(--ls-color-bg-neutral-top)
+}
+
+.vd-sticky.hd-header-section .hd-header-short {
+    display: block
+}
+
+.vd-sticky.hd-header-section .hd-header-wide {
+    display: none
+}
+
+.hd-demo-card-container {
+    padding: 24px 24px 12px
+}
+
+.hd-onboarding-card-container {
+    padding: 24px
+}
+
+.hd-onboarding-card-image-container {
+    display: flex;
+    height: 156px;
+    justify-content: center;
+    margin-bottom: 24px
+}
+
+.hd-onboarding-card-image-container .hd-onboarding-card-image {
+    align-self: center;
+    max-width: 208px
+}
+
+@media only screen and (min-width:769px) {
+    .hd-onboarding-card-image-container .hd-onboarding-card-image {
+        max-width: 100% !important
+    }
+}
+
+.hd-onboarding-full-width-card {
+    align-items: center;
+    border: none
+}
+
+.hd-onboarding-full-width-card .hd-onboarding-card-link-actions-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 16px;
+    justify-content: space-between;
+    text-align: center
+}
+
+.hd-onboarding-full-width-card .hd-onboarding-card-image-container {
+    margin-bottom: 16px
+}
+
+.hd-onboarding-full-width-card .hd-onboarding-card-content-container {
+    text-align: center
+}
+
+.hd-onboarding-full-width-card .hd-onboarding-card-actions .vd-btn--jumbo {
+    padding-left: 64px;
+    padding-right: 64px
+}
+
+.hd-onboarding-card-container.hd-onboarding-full-width-card {
+    padding: 0
+}
+
+.hd-onboarding-card-actions {
+    align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: end
+}
+
+.hd-onboarding-card-actions [class*=vd-btn--text-] {
+    margin-left: -20px
+}
+
+@media only screen and (max-width:768px) {
+    .hd-onboarding-card-actions {
+        align-items: center
+    }
+}
+
+.hd-layout-vertical {
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.hd-layout-horizontal {
+    display: flex;
+    flex-direction: row
+}
+
+.hd-layout-horizontal .hd-onboarding-card-image-container {
+    align-items: center;
+    flex-shrink: 0;
+    height: auto;
+    justify-content: center;
+    margin-bottom: 0;
+    margin-right: 24px;
+    width: 150px
+}
+
+.hd-layout-horizontal .hd-onboarding-card-content {
+    display: flex;
+    flex: 1 1;
+    flex-direction: column
+}
+
+@media only screen and (max-width:1000px) {
+    .vd-sticky .hd-header-section {
+        display: none
+    }
+}
+
+.ds-welcome-dialog-container .ds-welcome-sidebar {
+    background-color: #ebf2f9cc
+}
+
+.sp-lspay-onboarding-modal .vd-modal-container {
+    height: 95%
+}
+
+.sp-lspay-onboarding-modal .vd-modal-content {
+    height: 100%;
+    overflow: scroll
+}
+
+.sp-lspay-onboarding-modal .vd-modal-inner-container {
+    height: 100%;
+    max-height: 100%
+}
+
+.sp-lspay-portal-container-modal {
+    height: 100%
+}
+
+.lspay-portal-selector {
+    width: 100%
+}
+
+.lspay-portal-seg-control {
+    flex: 1 1
+}
+
+.pay-types-lspay-promo-action {
+    white-space: nowrap
+}
+
+@media only screen and (max-width:768px) {
+    .pay-types-promo .vd-promo-actions {
+        justify-content: center
+    }
+}
+
+.pay-types-promo.pay-types-application-visibility-promo-image .vd-promo-image-container {
+    margin-right: 12px;
+    width: 150px
+}
+
+.pay-types-lspay-application-table .vd-table-list-cell {
+    padding: 16px 8px
+}
+
+.pay-types-promo-banner {
+    min-height: 200px
+}
+
+/*# sourceMappingURL=app-dashboard-css-home-dashboard.3f4117ae.chunk.css.map*/

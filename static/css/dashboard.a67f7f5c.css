@@ -1,0 +1,259 @@
+.dashboard-card-container .vd-card {
+    margin-bottom: 5px;
+    margin-left: 0;
+    text-align: center
+}
+
+@media only screen and (min-width:769px) {
+    .dashboard-card-container {
+        flex-wrap: nowrap
+    }
+
+    .dashboard-card-container .dashboard-card-row {
+        column-gap: 20px
+    }
+
+    .dashboard-card-container .dashboard-card-row+.dashboard-card-row {
+        margin-top: 20px
+    }
+
+    .dashboard-card-container .vd-card {
+        margin-bottom: 0;
+        text-align: left
+    }
+
+    .dashboard-card-container .vd-card img {
+        max-width: 400px
+    }
+
+    .dashboard-card-container .dashboard-card-row .vd-card-1-up {
+        flex-basis: 100%
+    }
+
+    .dashboard-card-container .dashboard-card-row .vd-card-2-up {
+        flex-basis: calc(50% - 10px)
+    }
+
+    .dashboard-card-container .dashboard-card-row .vd-card-3-up {
+        flex-basis: calc(33.33% - 13.33px)
+    }
+
+    .dashboard-card-container .dashboard-card-row .vd-card-4-up {
+        flex-basis: calc(25% - 15px)
+    }
+
+    .dashboard-card-container .demo-complete-image {
+        max-height: 150px
+    }
+}
+
+.video-frame-min-height {
+    min-height: 400px
+}
+
+.video-frame-min-height .vd-video-thumbnail-container {
+    min-height: 300px
+}
+
+@media only screen and (min-width:769px) {
+    .video-frame-min-height .vd-video-thumbnail-container {
+        min-height: auto
+    }
+
+    .video-frame-min-height {
+        min-height: 224px
+    }
+}
+
+.onboarding-carousel_container {
+    height: calc(100% - 12px)
+}
+
+.transition-modal .vd-dialog-header {
+    margin-bottom: 24px;
+    margin-top: 12px
+}
+
+.vd-popover-container.vd-popover-tether-enabled {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    z-index: 450
+}
+
+.add-outlet-modal .add-outlet-content {
+    overflow: hidden !important
+}
+
+.add-outlet-modal .vd-modal-inner-container .vd-breadcrumb:first-child {
+    margin-left: 0;
+    margin-top: 0
+}
+
+.add-outlet-modal .vd-modal-inner-container .vd-dialog-actions:last-child {
+    margin-bottom: 0;
+    margin-right: 0
+}
+
+.add-outlet-modal #map-image-container {
+    background-image: url(https://vendfrontendassets.freetls.fastly.net/images/setup/map-placeholder-v1.svg);
+    background-size: cover;
+    border-radius: 4px 0 0 4px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%
+}
+
+.add-outlet-modal #map-image-container>img {
+    display: block;
+    max-width: 100%;
+    object-fit: cover
+}
+
+.add-outlet-modal #map-image-container>i {
+    left: 55%;
+    top: 42%
+}
+
+.add-outlet-modal .map-container {
+    height: 100%;
+    width: 100%
+}
+
+.add-outlet-modal .add-outlet-steps-container {
+    position: relative
+}
+
+.add-outlet-modal .add-register-scroll-wrapper {
+    padding-bottom: 60px;
+    position: relative
+}
+
+.add-outlet-modal .add-register-scroll-container {
+    box-sizing: border-box;
+    overflow-x: hidden
+}
+
+.add-outlet-modal .add-register-actions {
+    bottom: 0;
+    position: absolute;
+    width: 100%
+}
+
+.add-outlet-modal .sidebar-image-container {
+    background-color: var(--ls-color-border-neutral-soft);
+    background-size: cover;
+    border-radius: 3px 0 0 3px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%
+}
+
+.add-outlet-modal .sidebar-image-container .sidebar-image {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center
+}
+
+.add-outlet-modal .add-tax-receipt-wrapper {
+    background-color: #f5f5f5;
+    height: 100%
+}
+
+.add-outlet-modal .add-tax-receipt {
+    background-color: #fff;
+    box-shadow: 0 0 10px var(--ls-color-overlay-neutral-strong);
+    color: #9f9f9f;
+    display: relative;
+    font-family: Fira Mono, monospace;
+    font-size: 9px;
+    font-weight: 400;
+    margin: 10px;
+    padding: 10px 7px 1px;
+    text-align: left;
+    width: 220px
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-store-name {
+    padding-bottom: 7px
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-footer,
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-header,
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-title {
+    text-align: center
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-divider {
+    border-top: 1px solid #9f9f9f;
+    margin: 5px 0
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-line {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    position: relative
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-lineitem {
+    padding: 3px 0;
+    text-align: left
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-lineitem>.add-tax-receipt-line {
+    padding-left: 5%
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-taxes {
+    color: #000;
+    font-weight: 700
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-taxes .add-tax-receipt-tax-name {
+    padding-right: 10px
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-indent {
+    padding-left: 10%
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-total {
+    font-size: 1.5em
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-loyalty-link {
+    word-wrap: break-word;
+    padding: 5px 0
+}
+
+.add-outlet-modal .add-tax-receipt .add-tax-receipt-barcode {
+    opacity: .35;
+    padding: 10px 0 5px
+}
+
+.add-outlet-modal .vd-popover p {
+    color: #fff
+}
+
+.add-outlet-modal .add-register-tooltip {
+    max-width: 290px
+}
+
+.add-outlet-modal .add-register-button {
+    color: var(--ls-color-fg-go-default) !important;
+    text-decoration: none !important
+}
+
+.add-outlet-modal .force-layer {
+    transform: translateZ(0)
+}
+
+.add-outlet-modal .payments-setup-container {
+    padding: 0
+}
+
+/*# sourceMappingURL=dashboard.a67f7f5c.css.map*/

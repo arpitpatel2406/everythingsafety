@@ -1,3 +1,67 @@
 main.css -> https://vendappcdn.freetls.fastly.net/packages/spa/static/system/css/spa.82905be0.css
 fonts.css -> https://vendfrontendassets.freetls.fastly.net/fonts/fonts-v11.css
 navigation.css -> https://vendappcdn.freetls.fastly.net/packages/navigation/static/system/css/navigation.b37df668.css
+independent_frames.css -> "https://lightspeedhq.us2app.churnzero.net/external/css/independent_frames.css
+announcements.css ->href="https://lightspeedhq.us2app.churnzero.net/external/css/announcements.css">
+dashboard.a67f7f5c.css->href="https://vendappcdn.freetls.fastly.net/packages/dashboard/static/system/css/dashboard.a67f7f5c.css
+app-dashboard-css-home-dashboard.3f4117ae.chunk.css ->  href="https://vendappcdn.freetls.fastly.net/packages/dashboard/static/system/css/app-dashboard-css-home-dashboard.3f4117ae.chunk.css"
+
+
+
+systemjs.6.14.1-0.1.0.js ->https://vendappcdn.freetls.fastly.net/packages/shared/static/system/js/systemjs.6.14.1-0.1.0.js
+churnzero.js -><script type="text/javascript" async="" src="https://lightspeedhq.us2app.churnzero.net/churnzero.js"></script>
+iizsos98->https://widget.intercom.io/widget/iizsos98
+datadog-logs.js->
+datadog-rum-v4.js->https://www.datadoghq-browser-agent.com/datadog-rum
+
+
+All Sale Statuses in the Lightspeed X‑Series API
+SAVED — A parked or draft sale (in progress) that can still have line items, payments, or customer data added. Typically transitions to CLOSED.
+
+CLOSED — A completed sale; inventory counts are updated.
+
+ONACCOUNT — A sale made on credit; payment pending. Reduces inventory. Should transition to ONACCOUNT_CLOSED after full payment.
+
+ONACCOUNT_CLOSED — A fully paid account sale. Like CLOSED, it should only go to VOIDED if cancelled.
+
+LAYBY — A deposit-based sale; partial payment made.
+
+LAYBY_CLOSED — A layby sale that's been paid off in full.
+
+AWAITING_DISPATCH — Sale is pending shipping (commonly for e‑commerce).
+
+AWAITING_PICKUP — Sale is pending customer pickup (usually e‑commerce).
+
+DISPATCHED_CLOSED — The sale marked as awaiting dispatch has now been shipped.
+
+PICKED_UP_CLOSED — The sale awaiting pickup has now been collected by the customer.
+
+SERVICE — A sale containing one or more labor/service items; still in progress.
+
+SERVICE_CLOSED — A service sale that is fully paid and completed.
+
+VOIDED — A cancelled sale; inventory is returned and all related payments are removed.
+
+
+What to Include as "Valid Sales" for EOD Count?
+To capture all valid and completed sales at the end of the day (EOD), you’d typically include:
+
+CLOSED
+
+ONACCOUNT_CLOSED
+
+LAYBY_CLOSED
+
+DISPATCHED_CLOSED
+
+PICKED_UP_CLOSED
+
+SERVICE_CLOSED
+
+You might also consider including:
+
+ONACCOUNT (if you're counting credit sales even before full payment)
+
+LAYBY (if counting deposit-based but not yet closed)
+
+SERVICE (if service transactions in progress are relevant to your reporting)

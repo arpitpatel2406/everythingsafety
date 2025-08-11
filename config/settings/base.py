@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # Add your apps here as you create them
     'apps.core',
+    'apps.lightspeed',
     # 'apps.users',
 ]
 

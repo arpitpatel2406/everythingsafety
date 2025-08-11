@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('apps.core.urls')),
+    path('api/v1/', include('apps.lightspeed.urls')),
     # Add your app URLs here
     # path('api/v1/', include('apps.users.urls')),
 ]
