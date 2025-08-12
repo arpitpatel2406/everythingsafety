@@ -1,9 +1,10 @@
+{% load static %}
 <header class="nv-topnav-container">
 <div class="nv-topnav vd-topbar" data-testid="TopbarContent">
   <div class="nv-topnav-header vd-nav-item" data-testid="TopbarContentItem"><a class="vd-logo-container"
-      href="#" aria-label="Home"><img alt="Lightspeed logo"
-        src="//vendfrontendassets.freetls.fastly.net/images/logos/lightspeed-logo-all-white-v2.svg"
-        class="vd-logo" width="120px"></a></div>
+      href="#" aria-label="Home"><img alt="EverythingSafety logo"
+        src="{% static 'images/eslogo.jpeg' %}"
+        class="vd-logo" width="120px" style="display: block; width: 200px; height: auto; border: 2px solid red;"></a></div>
   <div class="nv-topnav-header nv-topnav-header--mobile vd-nav-item" data-testid="MenuButton">
     <div class="vd-nav-item"><a class="vd-nav-item-action" data-dd-privacy="allow" data-test="menu-button"
         href="#"><i class="fa fa-bars vd-icon vd-nav-item-icon"></i>

@@ -192,4 +192,5 @@ Thumbs.db
 *.sqlite3
 *.db
 
-
+# Json
+*.json
