@@ -1,334 +1,423 @@
 {% load static %}
 <html lang="en-us">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="importmap-type" content="systemjs-importmap">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta http-equiv="Content-Security-Policy"
-  content="default-src 'self' https: *:*; img-src https: data: blob:; script-src 'unsafe-inline' 'unsafe-eval' https: *:*; frame-src 'self' https: blob:; connect-src https: localhost:* ws://*:* wss://*:*; style-src 'self' 'unsafe-inline' https:; object-src 'none'; worker-src blob:;">
-<meta name="theme-color" content="#0B0B0B">
-<title>Dashboard | Lightspeed Retail</title>
-<link rel="preconnect" href="https://cdn.raygun.io">
-<link rel="preconnect" href="https://vendappcdn.freetls.fastly.net">
-<link rel="preconnect" href="https://vendfrontendassets.freetls.fastly.net">
-<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
-<link rel="stylesheet" href="{% static 'css/main.css' %}">
-<script type="text/javascript">
-  !function (a, b, c, d, e, f, g, h) {
-    a.RaygunObject = e, a[e] = a[e] || function () {
-      (a[e].o = a[e].o || []).push(arguments)
-    }, f = b.createElement(c), g = b.getElementsByTagName(c)[0],
-      f.async = 1, f.src = d, g.parentNode.insertBefore(f, g), h = a.onerror, a.onerror = function (b, c, d, f, g) {
-        h && h(b, c, d, f, g), g || (g = new Error(b)), a[e].q = a[e].q || [], a[e].q.push({
-          e: g
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="importmap-type" content="systemjs-importmap" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https: *:*; img-src https: data: blob:; script-src 'unsafe-inline' 'unsafe-eval' https: *:*; frame-src 'self' https: blob:; connect-src https: localhost:* ws://*:* wss://*:*; style-src 'self' 'unsafe-inline' https:; object-src 'none'; worker-src blob:;" />
+  <meta name="theme-color" content="#0B0B0B" />
+  <title>Dashboard | Lightspeed Retail</title>
+  <link rel="preconnect" href="https://cdn.raygun.io" />
+  <link rel="preconnect" href="https://vendappcdn.freetls.fastly.net" />
+  <link rel="preconnect" href="https://vendfrontendassets.freetls.fastly.net" />
+  <link rel="stylesheet" href="{% static 'css/fonts.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  <script type="text/javascript">
+    !(function (a, b, c, d, e, f, g, h) {
+      ; (a.RaygunObject = e),
+        (a[e] =
+          a[e] ||
+          function () {
+            ; (a[e].o = a[e].o || []).push(arguments)
+          }),
+        (f = b.createElement(c)),
+        (g = b.getElementsByTagName(c)[0]),
+        (f.async = 1),
+        (f.src = d),
+        g.parentNode.insertBefore(f, g),
+        (h = a.onerror),
+        (a.onerror = function (b, c, d, f, g) {
+          h && h(b, c, d, f, g),
+            g || (g = new Error(b)),
+            (a[e].q = a[e].q || []),
+            a[e].q.push({
+              e: g
+            })
         })
-      }
-  }(window, document, "script", "//cdn.raygun.io/raygun4js/raygun.min.js", "rg4js");
-</script>
-<script>
-  (function (h, o, u, n, d) {
-    h = h[d] = h[d] || { q: [], onReady: function (c) { h.q.push(c) } }
-    d = o.createElement(u); d.async = 1; d.src = n
-    n = o.getElementsByTagName(u)[0]; n.parentNode.insertBefore(d, n)
-  })(window, document, 'script', 'https://www.datadoghq-browser-agent.com/datadog-rum-v4.js', 'DD_RUM')
-</script>
-<script>
-  (function (h, o, u, n, d) {
-    h = h[d] = h[d] || { q: [], onReady: function (c) { h.q.push(c) } }
-    d = o.createElement(u); d.async = 1; d.src = n
-    n = o.getElementsByTagName(u)[0]; n.parentNode.insertBefore(d, n)
-  })(window, document, 'script', 'https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js', 'DD_LOGS')
-</script>
-<script type="systemjs-importmap" src="/import-map.json"></script>
-<script
-  src="https://vendappcdn.freetls.fastly.net/packages/shared/static/system/js/regenerator-runtime.0fb0c901.js"></script>
-<script
-  src="https://vendappcdn.freetls.fastly.net/packages/shared/static/system/js/import-map-overrides.2.4.2-0.1.0.js"></script>
-<style type="text/css">
-  .imo-unstyled {
-    border: none;
-    padding: 0;
-    width: auto;
-    overflow: visible;
-    background: transparent;
-    color: inherit;
-    font: inherit;
-    line-height: normal;
-    cursor: pointer;
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
-    -webkit-appearance: none;
-  }
-  .imo-unstyled::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-  }
-  .imo-trigger {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 10px;
-    border-radius: 5px;
-    background-color: navajowhite;
-    height: 50px;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-family: sans-serif;
-    z-index: 10500;
-  }
-  .imo-popup {
-    box-sizing: border-box;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    z-index: 10000;
-    background-color: black;
-    color: white;
-    font-family: sans-serif;
-    padding: 24px;
-    overflow-y: auto;
-  }
-  .imo-popup a:visited,
-  .imo-popup a {
-    color: white;
-  }
-  .imo-popup .imo-module-dialog {
-    left: calc(50% - 200px);
-  }
-  .imo-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  .imo-list {
-    margin-left: 16px;
-  }
-  .imo-list>*:not(:last-child) {
-    margin-bottom: 8px;
-  }
-  .imo-list-container *,
-  .imo-modal-container * {
-    font-family: sans-serif;
-    box-sizing: border-box;
-  }
-  .imo-module-dialog {
-    position: fixed;
-    z-index: 30000000;
-    top: 30%;
-    max-width: 600px;
-    margin: 0 auto;
-    border: 4px solid navajowhite;
-    background-color: white;
-    padding: 1em;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-  }
-  .imo-module-dialog input {
-    width: 100%;
-    font-size: 16px;
-    box-sizing: border-box;
-    padding-right: 20px;
-  }
-  .imo-module-dialog table {
-    margin-bottom: 16px;
-  }
-  .imo-module-dialog table td:first-child {
-    text-align: right;
-    padding-right: 16px;
-    word-break: keep-all;
-  }
-  .imo-module-dialog table td {
-    word-break: break-all;
-  }
-  .imo-module-dialog.imo-overridden {
-    border: 4px solid salmon;
-  }
-  .imo-table-header-actions {
-    display: flex;
-    align-items: center;
-  }
-  .imo-overrides-table {
-    border-collapse: collapse;
-    margin-top: 32px;
-  }
-  .imo-overrides-table tr td:first-child {
-    display: flex;
-    align-items: center;
-    padding-right: 32px;
-    position: relative;
-  }
-  .imo-needs-refresh {
-    position: absolute;
-    right: 8px;
-    width: 20px;
-    height: 20px;
-    /* base64 encoded 27F2 svg */
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='261' height='216' xmlns='http://www.w3.org/2000/svg' stroke='%23ffffff' stroke-linecap='square' stroke-miterlimit='10' shape-rendering='auto' stroke-opacity='1' fill='%23ffffff' stroke-dasharray='none' stroke-width='1' stroke-linejoin='miter' stroke-dashoffset='0'%3E%3Cg%3E%3Cpath fill='%23ffffff' d='m152.5625,214.0625q-27.5625,0 -49.6406,-11.8125q-22.0781,-11.8125 -34.7344,-28.4062l12.6563,-11.5313q10.6874,15.1875 31.0781,25.0313q20.3906,9.8437 40.6406,9.8437q21.375,0 44.1563,-11.5313q22.7812,-11.5312 34.3124,-34.3124q11.5313,-22.7813 11.5313,-44.1563q0,-21.375 -11.5313,-44.1563q-11.5312,-22.7812 -34.3124,-34.3124q-22.7813,-11.5313 -44.1563,-11.5313q-19.9687,0 -39.6563,9.1406q-19.6874,9.1407 -30.9374,24.1875q-11.25,15.0469 -16.7344,35.7188l42.3281,-34.7344l-54,91.6875l-54,-91.6875l47.25,38.8125q3.9375,-24.4687 17.4375,-44.5781q13.5,-20.1094 36.9844,-32.7656q23.4844,-12.6563 51.3281,-12.6563q29.25,0 54,14.0625q24.75,14.0625 38.8125,38.8125q14.0625,24.75 14.0625,54q0,29.25 -14.0625,54q-14.0625,24.75 -38.8125,38.8125q-24.75,14.0625 -54,14.0625z' /%3E%3C/g%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .imo-status {
-    height: 16px;
-    width: 16px;
-    border-radius: 8px;
-    border: 1px solid white;
-    margin-right: 8px;
-  }
-  .imo-disabled-override {
-    background-color: lightblue;
-  }
-  .imo-next-override {
-    background-color: darkred;
-  }
-  .imo-current-override {
-    background-color: salmon;
-  }
-  .imo-default-module {
-    background-color: lightgoldenrodyellow;
-  }
-  .imo-external-override {
-    background-color: orange;
-  }
-  .imo-next-default {
-    background-color: darkgoldenrod;
-  }
-  .imo-dev-lib-override {
-    background-color: lightpink;
-  }
-  .imo-overrides-table tbody tr:hover {
-    cursor: pointer;
-    background-color: #404040;
-  }
-  .imo-overrides-table td,
-  .imo-overrides-table th {
-    line-height: 18px;
-    padding: 16px;
-    border: 1px solid white;
-  }
-  .imo-add-new {
-    margin-left: 16px;
-  }
-  .imo-clear-input {
-    position: absolute;
-    top: 0;
-    right: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
-  .imo-modal-container {
-    font-family: sans-serif;
-  }
-  .imo-modal {
-    background-color: rgba(61, 70, 77, 0.6);
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 20000000;
-  }
-  .imo-list-search,
-  .imo-list-container button,
-  .imo-modal-container button {
-    font-size: 14px;
-    height: 27px;
-    line-height: 27px;
-  }
-  .imo-list-search {
-    line-height: 22px;
-    border: none;
-    padding: 5px;
-  }
-</style>
-<script
-  src="{% static 'js/systemjs.6.14.1-0.1.0.js' %}"></script>
-<style></style>
-<script type="text/javascript" async=""
-  src="{% static 'js/churnzero.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css/navigation.css' %}">
-<link id="cz-independent-frame-styles" type="text/css" rel="stylesheet"
-  href="{% static 'css/independent_frames.css' %}">
-<link id="cz-external-announcement-styles" rel="stylesheet" type="text/css"
-  href="{% static 'css/announcements.css' %}">
-<link rel="stylesheet"
-  href="{% static 'css/dashboard.a67f7f5c.css' %}">
-<link rel="stylesheet" type="text/css"
-  href="{% static 'css/app-dashboard-css-home-dashboard.3f4117ae.chunk.css' %}">
-<script type="text/javascript"
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDutrYQtSlpxq-x8CIaKrPDT8VoAGF7Y_0&amp;libraries=places&amp;callback=initGoogleMap&amp;language=en"></script>
-<script type="text/javascript" charset="UTF-8"
-  src="https://maps.googleapis.com/maps-api-v3/api/js/61/12c/common.js"></script>
-<script type="text/javascript" charset="UTF-8"
-  src="https://maps.googleapis.com/maps-api-v3/api/js/61/12c/util.js"></script>
+    })(
+      window,
+      document,
+      'script',
+      '//cdn.raygun.io/raygun4js/raygun.min.js',
+      'rg4js'
+    )
+  </script>
+  <script>
+      ; (function (h, o, u, n, d) {
+        h = h[d] = h[d] || {
+          q: [],
+          onReady: function (c) {
+            h.q.push(c)
+          }
+        }
+        d = o.createElement(u)
+        d.async = 1
+        d.src = n
+        n = o.getElementsByTagName(u)[0]
+        n.parentNode.insertBefore(d, n)
+      })(
+        window,
+        document,
+        'script',
+        'https://www.datadoghq-browser-agent.com/datadog-rum-v4.js',
+        'DD_RUM'
+      )
+  </script>
+  <script>
+      ; (function (h, o, u, n, d) {
+        h = h[d] = h[d] || {
+          q: [],
+          onReady: function (c) {
+            h.q.push(c)
+          }
+        }
+        d = o.createElement(u)
+        d.async = 1
+        d.src = n
+        n = o.getElementsByTagName(u)[0]
+        n.parentNode.insertBefore(d, n)
+      })(
+        window,
+        document,
+        'script',
+        'https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js',
+        'DD_LOGS'
+      )
+  </script>
+  <script type="systemjs-importmap" src="/import-map.json"></script>
+  <script
+    src="https://vendappcdn.freetls.fastly.net/packages/shared/static/system/js/regenerator-runtime.0fb0c901.js"></script>
+  <script
+    src="https://vendappcdn.freetls.fastly.net/packages/shared/static/system/js/import-map-overrides.2.4.2-0.1.0.js"></script>
+  <style type="text/css">
+    .imo-unstyled {
+      border: none;
+      padding: 0;
+      width: auto;
+      overflow: visible;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      line-height: normal;
+      cursor: pointer;
+      -webkit-font-smoothing: inherit;
+      -moz-osx-font-smoothing: inherit;
+      -webkit-appearance: none;
+    }
+
+    .imo-unstyled::-moz-focus-inner {
+      border: 0;
+      padding: 0;
+    }
+
+    .imo-trigger {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      margin: 10px;
+      border-radius: 5px;
+      background-color: navajowhite;
+      height: 50px;
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      font-family: sans-serif;
+      z-index: 10500;
+    }
+
+    .imo-popup {
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      z-index: 10000;
+      background-color: black;
+      color: white;
+      font-family: sans-serif;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .imo-popup a:visited,
+    .imo-popup a {
+      color: white;
+    }
+
+    .imo-popup .imo-module-dialog {
+      left: calc(50% - 200px);
+    }
+
+    .imo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .imo-list {
+      margin-left: 16px;
+    }
+
+    .imo-list>*:not(:last-child) {
+      margin-bottom: 8px;
+    }
+
+    .imo-list-container *,
+    .imo-modal-container * {
+      font-family: sans-serif;
+      box-sizing: border-box;
+    }
+
+    .imo-module-dialog {
+      position: fixed;
+      z-index: 30000000;
+      top: 30%;
+      max-width: 600px;
+      margin: 0 auto;
+      border: 4px solid navajowhite;
+      background-color: white;
+      padding: 1em;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+
+    .imo-module-dialog input {
+      width: 100%;
+      font-size: 16px;
+      box-sizing: border-box;
+      padding-right: 20px;
+    }
+
+    .imo-module-dialog table {
+      margin-bottom: 16px;
+    }
+
+    .imo-module-dialog table td:first-child {
+      text-align: right;
+      padding-right: 16px;
+      word-break: keep-all;
+    }
+
+    .imo-module-dialog table td {
+      word-break: break-all;
+    }
+
+    .imo-module-dialog.imo-overridden {
+      border: 4px solid salmon;
+    }
+
+    .imo-table-header-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .imo-overrides-table {
+      border-collapse: collapse;
+      margin-top: 32px;
+    }
+
+    .imo-overrides-table tr td:first-child {
+      display: flex;
+      align-items: center;
+      padding-right: 32px;
+      position: relative;
+    }
+
+    .imo-needs-refresh {
+      position: absolute;
+      right: 8px;
+      width: 20px;
+      height: 20px;
+      /* base64 encoded 27F2 svg */
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='261' height='216' xmlns='http://www.w3.org/2000/svg' stroke='%23ffffff' stroke-linecap='square' stroke-miterlimit='10' shape-rendering='auto' stroke-opacity='1' fill='%23ffffff' stroke-dasharray='none' stroke-width='1' stroke-linejoin='miter' stroke-dashoffset='0'%3E%3Cg%3E%3Cpath fill='%23ffffff' d='m152.5625,214.0625q-27.5625,0 -49.6406,-11.8125q-22.0781,-11.8125 -34.7344,-28.4062l12.6563,-11.5313q10.6874,15.1875 31.0781,25.0313q20.3906,9.8437 40.6406,9.8437q21.375,0 44.1563,-11.5313q22.7812,-11.5312 34.3124,-34.3124q11.5313,-22.7813 11.5313,-44.1563q0,-21.375 -11.5313,-44.1563q-11.5312,-22.7812 -34.3124,-34.3124q-22.7813,-11.5313 -44.1563,-11.5313q-19.9687,0 -39.6563,9.1406q-19.6874,9.1407 -30.9374,24.1875q-11.25,15.0469 -16.7344,35.7188l42.3281,-34.7344l-54,91.6875l-54,-91.6875l47.25,38.8125q3.9375,-24.4687 17.4375,-44.5781q13.5,-20.1094 36.9844,-32.7656q23.4844,-12.6563 51.3281,-12.6563q29.25,0 54,14.0625q24.75,14.0625 38.8125,38.8125q14.0625,24.75 14.0625,54q0,29.25 -14.0625,54q-14.0625,24.75 -38.8125,38.8125q-24.75,14.0625 -54,14.0625z' /%3E%3C/g%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .imo-status {
+      height: 16px;
+      width: 16px;
+      border-radius: 8px;
+      border: 1px solid white;
+      margin-right: 8px;
+    }
+
+    .imo-disabled-override {
+      background-color: lightblue;
+    }
+
+    .imo-next-override {
+      background-color: darkred;
+    }
+
+    .imo-current-override {
+      background-color: salmon;
+    }
+
+    .imo-default-module {
+      background-color: lightgoldenrodyellow;
+    }
+
+    .imo-external-override {
+      background-color: orange;
+    }
+
+    .imo-next-default {
+      background-color: darkgoldenrod;
+    }
+
+    .imo-dev-lib-override {
+      background-color: lightpink;
+    }
+
+    .imo-overrides-table tbody tr:hover {
+      cursor: pointer;
+      background-color: #404040;
+    }
+
+    .imo-overrides-table td,
+    .imo-overrides-table th {
+      line-height: 18px;
+      padding: 16px;
+      border: 1px solid white;
+    }
+
+    .imo-add-new {
+      margin-left: 16px;
+    }
+
+    .imo-clear-input {
+      position: absolute;
+      top: 0;
+      right: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .imo-modal-container {
+      font-family: sans-serif;
+    }
+
+    .imo-modal {
+      background-color: rgba(61, 70, 77, 0.6);
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 20000000;
+    }
+
+    .imo-list-search,
+    .imo-list-container button,
+    .imo-modal-container button {
+      font-size: 14px;
+      height: 27px;
+      line-height: 27px;
+    }
+
+    .imo-list-search {
+      line-height: 22px;
+      border: none;
+      padding: 5px;
+    }
+  </style>
+  <script src="{% static 'js/systemjs.6.14.1-0.1.0.js' %}"></script>
+  <style></style>
+  <script type="text/javascript" async="" src="{% static 'js/churnzero.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/navigation.css' %}" />
+  <link id="cz-independent-frame-styles" type="text/css" rel="stylesheet"
+    href="{% static 'css/independent_frames.css' %}" />
+  <link id="cz-external-announcement-styles" rel="stylesheet" type="text/css"
+    href="{% static 'css/announcements.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/dashboard.a67f7f5c.css' %}" />
+  <link rel="stylesheet" type="text/css"
+    href="{% static 'css/app-dashboard-css-home-dashboard.3f4117ae.chunk.css' %}" />
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDutrYQtSlpxq-x8CIaKrPDT8VoAGF7Y_0&amp;libraries=places&amp;callback=initGoogleMap&amp;language=en"></script>
+  <script type="text/javascript" charset="UTF-8"
+    src="https://maps.googleapis.com/maps-api-v3/api/js/61/12c/common.js"></script>
+  <script type="text/javascript" charset="UTF-8"
+    src="https://maps.googleapis.com/maps-api-v3/api/js/61/12c/util.js"></script>
 </head>
+
 <body __processed_8aa5a5c8-bd17-4e38-9ced-355e0227fcb2__="true">
-<noscript>
-  You need to enable JavaScript to run this app.
-</noscript>
-<!-- <script>
+  <noscript> You need to enable JavaScript to run this app. </noscript>
+  <!-- <script>
   System.import('@vend-spa/spa');
 </script> -->
-<div class="vd-body">
-  {% include 'base/header.html' %}
-  {% include 'base/sidebar.html' %}
-  <main class="vd-main-content-container">
-    <div class="vd-account-banners">
-      <div class="nv-account-banner"></div>
-    </div>
-    <div class="vd-main-content-inner-container">
-      <section class="vd-main-content">
-        <div data-stage="runtime" data-track="stage">
-          <div class="vd-toast-notification-container"></div>
-          <section class="PJLV vd-section hd-header-section">
-            <div class="PJLV vd-section-wrap">
-              <div class="vd-g-row vd-flex vd-flex--align-center vd-flex--justify-between">
-                <div class="vd-g-col vd-g-s-12 vd-g-l-5 ds-header vd-mr10">
-                  <h3 class="vd-text-heading hd-header-short" role="heading" aria-level="3">Here’s what’s happening
-                  </h3>
-                  <h1 class="vd-text-hero hd-header-wide" role="heading" aria-level="1" data-dd-privacy="mask">Hi
-                    David Holland, here’s what’s happening in this store</h1>
-                </div>
-                <div class="vd-g-col vd-g-s-12 vd-g-l-7 vd-flex vd-flex--justify-end ds-filters">
-                  <div class="vd-mr3 ds-period-selector"><label class="vd-segcontrol"><input
-                        class="vd-segcontrol-input" type="radio" data-track="day">
-                      <div class="vd-segcontrol-button">Today</div>
-                    </label><label class="vd-segcontrol"><input class="vd-segcontrol-input" type="radio"
-                        data-track="week">
-                      <div class="vd-segcontrol-button">This week</div>
-                    </label><label class="vd-segcontrol vd-segcontrol--selected"><input class="vd-segcontrol-input"
-                        type="radio" data-track="month" checked="">
-                      <div class="vd-segcontrol-button">This month</div>
-                    </label></div>
+  <div class="vd-body">
+    {% include 'base/header.html' %} {% include 'base/sidebar.html' %}
+    <main class="vd-main-content-container">
+      <div class="vd-account-banners">
+        <div class="nv-account-banner"></div>
+      </div>
+      <div class="vd-main-content-inner-container">
+        <section class="vd-main-content">
+          <div data-stage="runtime" data-track="stage">
+            <div class="vd-toast-notification-container"></div>
+            <section class="PJLV vd-section hd-header-section">
+              <div class="PJLV vd-section-wrap">
+                <div class="vd-g-row vd-flex vd-flex--align-center vd-flex--justify-between">
+                  <div class="vd-g-col vd-g-s-12 vd-g-l-5 ds-header vd-mr10">
+                    <h3 class="vd-text-heading hd-header-short" role="heading" aria-level="3">
+                      Here’s what’s happening
+                    </h3>
+                    <h1 class="vd-text-hero hd-header-wide" role="heading" aria-level="1" data-dd-privacy="mask">
+                      Hi David Holland, here’s what’s happening in this store
+                    </h1>
+                  </div>
+                  <div class="vd-g-col vd-g-s-12 vd-g-l-7 vd-flex vd-flex--justify-end ds-filters">
+                    <div class="vd-mr3 ds-period-selector" id="periodSelector">
+                      <label class="vd-segcontrol vd-segcontrol--selected">
+                        <input class="vd-segcontrol-input" type="radio" name="period" data-track="day" checked>
+                        <div class="vd-segcontrol-button">Today</div>
+                      </label>
+                      <label class="vd-segcontrol">
+                        <input class="vd-segcontrol-input" type="radio" name="period" data-track="week">
+                        <div class="vd-segcontrol-button">This week</div>
+                      </label>
+                      <label class="vd-segcontrol">
+                        <input class="vd-segcontrol-input" type="radio" name="period" data-track="month">
+                        <div class="vd-segcontrol-button">This month</div>
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-          <section class="PJLV vd-section vd-section--tertiary vd-pt2 vd-pb2">
-            <div class="PJLV vd-section-wrap">
-              <section class="PJLV vd-section vd-section--tertiary performance-section">
-                <div class="PJLV vd-section-wrap">
-                  <div class="performance-content">
-                    <div class="vd-g-row vd-g-row--gutter">
-                      <div class="vd-g-col vd-g-s-12 vd-g-l-4 vd-pt3 vd-pl3 vd-pr3">
-                        <div class="vd-text-heading">This month's sales</div>
-                        <div class="vd-text-hero">$109,744.17</div>
-                        <div>That’s $8,936.28 more than this time last month.</div>
-                      </div>
-                      <div class="vd-g-col vd-g-s-12 vd-g-l-8 vd-pt3 vd-pl3 vd-pr3">
-                        <div class="vd-g-row">
-                          <div class="vd-g-col vd-g-s-8 vd-g-l-8">
-                            <h2 class="vd-text-sub-heading vd-pb5" role="heading" aria-level="2">All outlets</h2>
-                            <!-- <div class="vd-line-graph-container" style="width: 100%; height: 100%;"><svg
+            </section>
+            <section class="PJLV vd-section vd-section--tertiary vd-pt2 vd-pb2">
+              <div class="PJLV vd-section-wrap">
+                <section class="PJLV vd-section vd-section--tertiary performance-section">
+                  <div class="PJLV vd-section-wrap">
+                    <div class="performance-content">
+                      <div class="vd-g-row vd-g-row--gutter">
+                        <div class="vd-g-col vd-g-s-12 vd-g-l-4 vd-pt3 vd-pl3 vd-pr3">
+                          <div class="vd-text-heading">
+                            This month's sales
+                          </div>
+                          <div class="vd-text-hero" id="totalSales">$109,744.17</div>
+                          <div id="salesDelta">
+                            That’s $8,936.28 more than this time last month.
+                          </div>
+                        </div>
+                        <div class="vd-g-col vd-g-s-12 vd-g-l-8 vd-pt3 vd-pl3 vd-pr3">
+                          <div class="vd-g-row">
+                            <div class="vd-g-col vd-g-s-8 vd-g-l-8">
+                              <h2 class="vd-text-sub-heading vd-pb5" role="heading" aria-level="2">
+                                All outlets
+                              </h2>
+                              <!-- <div class="vd-line-graph-container" style="width: 100%; height: 100%;"><svg
                                 preserveAspectRatio="xMinYMid" class="vd-line-chart" height="230" width="453">
                                 <g transform="translate(35, 3)" class="vd-line-chart-canvas">
                                   <rect class="vd-background" fill="transparent" height="0" width="0"></rect>
@@ -525,21 +614,29 @@
                                   </g>
                                 </g>
                               </svg></div> -->
-                          </div>
-                          <div class="vd-g-col vd-g-s-4 vd-g-l-4">
-                            <div
-                              class="vd-g-row vd-flex--align-end vd-flex--justify-between performance-metrics vd-g-row--gutter">
-                              <div class="vd-g-col vd-g-s-12 vd-pt3"><span
-                                  class="vd-text-label vd-util-text-overflow-break-word">Average sale value</span>
-                                <h3 class="vd-text-heading vd-no-wrap" role="heading" aria-level="3">$249.42</h3><span
-                                  class="vd-text-supplementary vd-util-text-overflow-break-word vd-mt1">$57.59 more
-                                  than last month</span>
-                              </div>
-                              <div class="vd-g-col vd-g-s-12 vd-pt3"><span
-                                  class="vd-text-label vd-util-text-overflow-break-word">Average items per sale</span>
-                                <h3 class="vd-text-heading vd-no-wrap" role="heading" aria-level="3">5</h3><span
-                                  class="vd-text-supplementary vd-util-text-overflow-break-word vd-mt1">0.41 more than
-                                  last month</span>
+                            </div>
+                            <div class="vd-g-col vd-g-s-4 vd-g-l-4">
+                              <div
+                                class="vd-g-row vd-flex--align-end vd-flex--justify-between performance-metrics vd-g-row--gutter">
+                                <div class="vd-g-col vd-g-s-12 vd-pt3">
+                                  <span class="vd-text-label vd-util-text-overflow-break-word">Average sale value</span>
+                                  <h3 class="vd-text-heading vd-no-wrap" role="heading" aria-level="3"
+                                    id="avgSaleValue">
+                                    $249.42
+                                  </h3>
+                                  <span class="vd-text-supplementary vd-util-text-overflow-break-word vd-mt1">$57.59
+                                    more than last month</span>
+                                </div>
+                                <div class="vd-g-col vd-g-s-12 vd-pt3">
+                                  <span class="vd-text-label vd-util-text-overflow-break-word">Average items per
+                                    sale</span>
+                                  <h3 class="vd-text-heading vd-no-wrap" role="heading" aria-level="3"
+                                    id="avgItemsPerSale">
+                                    5
+                                  </h3>
+                                  <span class="vd-text-supplementary vd-util-text-overflow-break-word vd-mt1">0.41 more
+                                    than last month</span>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -547,72 +644,92 @@
                       </div>
                     </div>
                   </div>
-                </div>
-              </section>
-            </div>
-          </section>
-          <section class="PJLV vd-section ds-header-wide">
-            <div class="PJLV vd-section-wrap">
-              <div class="vd-g-row vd-g-row--gutter">
-                <div class="vd-g-col vd-g-s-12 vd-g-m-9 vd-g-l-9">
-                  <div class="ds-things-selector">
-                    <div class="" style="left: 0px;">
-                      <div class="vd-section-container" role="region">
-                        <div class="vd-section-wrap">
-                          <div class="">
-                            <div class="vd-tabs vd-tabs--large" role="tablist">
-                              <div class="vd-tab vd-tab--active" data-track="know"><button class="vd-tab-button"
-                                  type="button" role="tab" data-testid="tab-button-know">Things to know</button></div>
-                              <div class="vd-tab" data-track="do"><button class="vd-tab-button" type="button"
-                                  role="tab" data-testid="tab-button-do">Things to do</button></div>
+                </section>
+              </div>
+            </section>
+            <section class="PJLV vd-section ds-header-wide">
+              <div class="PJLV vd-section-wrap">
+                <div class="vd-g-row vd-g-row--gutter">
+                  <div class="vd-g-col vd-g-s-12 vd-g-m-9 vd-g-l-9">
+                    <div class="ds-things-selector">
+                      <div class="" style="left: 0px">
+                        <div class="vd-section-container" role="region">
+                          <div class="vd-section-wrap">
+                            <div class="">
+                              <div class="vd-tabs vd-tabs--large" role="tablist">
+                                <div class="vd-tab vd-tab--active" data-track="know">
+                                  <button class="vd-tab-button" type="button" role="tab" data-testid="tab-button-know">
+                                    Things to know
+                                  </button>
+                                </div>
+                                <div class="vd-tab" data-track="do">
+                                  <button class="vd-tab-button" type="button" role="tab" data-testid="tab-button-do">
+                                    Things to do
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="ds-things ds-things--active">
-                    <div><span class="vd-text-signpost vd-util-text-overflow-break-word ds-things-header">Things to
-                        know</span><span class="ds-things-show-more-cards"><button data-track="retail-metrics"
-                          type="button" class="vd-btn vd-btn--icon-go vd-btn vd-btn--text-do vd-pl5 vd-pr5"><i
-                            class="fa fa-plus vd-icon vd-mr2"></i>Show more Retail metrics</button></span></div>
-                    <div class="vd-g-row vd-g-row--gutter">
-                      <div class="vd-g-col vd-g-xs-12 vd-g-s-12 vd-g-m-12 vd-g-l-12 vd-pb6">
-                        <div data-testid="card" data-cardid="101"
-                          class="PJLV vd-card vd-flex vd-flex--column vd-pa6 ds-card-container ds-card-column">
-                          <div class="vd-g-row performance-card vd-g-row--gutter">
-                            <div class="vd-g-col vd-g-s-12 vd-g-l-6 vd-flex vd-flex--column vd-flex--justify-between">
-                              <div>
-                                <h3 class="vd-text-sub-heading vd-pb5" role="heading" aria-level="3">Your sales
-                                  targets</h3>
-                                <div class="performance-meter">
-                                  <div class="performance-meter-bar" style="width: 0%;"></div>
-                                </div>
-                                <div class="vd-flex vd-flex--justify-between"><span
-                                    class="vd-text-heading">$0.00</span><a class="vd-link vd-link vd-link--secondary"
-                                    href="#" data-track="set-target">Set a sales target</a></div>
-                              </div>
-                              <div>
-                                <div
-                                  class="vd-g-row vd-flex--align-end vd-flex--justify-between performance-metrics vd-g-row--gutter">
-                                  <div class="vd-g-col vd-g-s-6 vd-pt3"><span
-                                      class="vd-text-label vd-util-text-overflow-break-word">Average sale value</span>
-                                    <h3 class="vd-text-heading vd-no-wrap" role="heading" aria-level="3">-</h3><span
-                                      class="vd-text-supplementary vd-util-text-overflow-break-word vd-mt1"></span>
+                    <div class="ds-things ds-things--active">
+                      <div>
+                        <span class="vd-text-signpost vd-util-text-overflow-break-word ds-things-header">Things to
+                          know</span><span class="ds-things-show-more-cards"><button data-track="retail-metrics"
+                            type="button" class="vd-btn vd-btn--icon-go vd-btn vd-btn--text-do vd-pl5 vd-pr5">
+                            <i class="fa fa-plus vd-icon vd-mr2"></i>Show more
+                            Retail metrics
+                          </button></span>
+                      </div>
+                      <div class="vd-g-row vd-g-row--gutter">
+                        <div class="vd-g-col vd-g-xs-12 vd-g-s-12 vd-g-m-12 vd-g-l-12 vd-pb6">
+                          <div data-testid="card" data-cardid="101"
+                            class="PJLV vd-card vd-flex vd-flex--column vd-pa6 ds-card-container ds-card-column">
+                            <div class="vd-g-row performance-card vd-g-row--gutter">
+                              <div class="vd-g-col vd-g-s-12 vd-g-l-6 vd-flex vd-flex--column vd-flex--justify-between">
+                                <div>
+                                  <h3 class="vd-text-sub-heading vd-pb5" role="heading" aria-level="3">
+                                    Your sales targets
+                                  </h3>
+                                  <div class="performance-meter">
+                                    <div class="performance-meter-bar" style="width: 0%"></div>
                                   </div>
-                                  <div class="vd-g-col vd-g-s-6 vd-pt3"><span
-                                      class="vd-text-label vd-util-text-overflow-break-word">Average items per
-                                      sale</span>
-                                    <h3 class="vd-text-heading vd-no-wrap" role="heading" aria-level="3">-</h3><span
-                                      class="vd-text-supplementary vd-util-text-overflow-break-word vd-mt1"></span>
+                                  <div class="vd-flex vd-flex--justify-between">
+                                    <span class="vd-text-heading">$0.00</span><a
+                                      class="vd-link vd-link vd-link--secondary" href="#" data-track="set-target">Set a
+                                      sales target</a>
                                   </div>
                                 </div>
+                                <div>
+                                  <div
+                                    class="vd-g-row vd-flex--align-end vd-flex--justify-between performance-metrics vd-g-row--gutter">
+                                    <div class="vd-g-col vd-g-s-6 vd-pt3">
+                                      <span class="vd-text-label vd-util-text-overflow-break-word">Average sale
+                                        value</span>
+                                      <h3 class="vd-text-heading vd-no-wrap" role="heading" aria-level="3">
+                                        -
+                                      </h3>
+                                      <span
+                                        class="vd-text-supplementary vd-util-text-overflow-break-word vd-mt1"></span>
+                                    </div>
+                                    <div class="vd-g-col vd-g-s-6 vd-pt3">
+                                      <span class="vd-text-label vd-util-text-overflow-break-word">Average items per
+                                        sale</span>
+                                      <h3 class="vd-text-heading vd-no-wrap" role="heading" aria-level="3">
+                                        -
+                                      </h3>
+                                      <span
+                                        class="vd-text-supplementary vd-util-text-overflow-break-word vd-mt1"></span>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                            <div class="vd-g-col vd-g-s-12 vd-g-l-6">
-                              <h2 class="vd-text-sub-heading vd-pb5" role="heading" aria-level="2">Your sales this
-                                month</h2>
-                              <!-- <div class="vd-line-graph-container" style="width: 100%; height: 100%;"><svg
+                              <div class="vd-g-col vd-g-s-12 vd-g-l-6">
+                                <h2 class="vd-text-sub-heading vd-pb5" role="heading" aria-level="2">
+                                  Your sales this month
+                                </h2>
+                                <!-- <div class="vd-line-graph-container" style="width: 100%; height: 100%;"><svg
                                   preserveAspectRatio="xMinYMid" class="vd-line-chart" height="230" width="629">
                                   <g transform="translate(35, 3)" class="vd-line-chart-canvas">
                                     <rect class="vd-background" fill="transparent" height="0" width="0"></rect>
@@ -821,16 +938,13 @@
                                     </g>
                                   </g>
                                 </svg></div> -->
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
 
-
-
-
-                      <div class="vd-g-col vd-g-xs-12 vd-g-s-12 vd-g-m-12 vd-g-l-8 vd-pb6">
-                        <!-- <div data-testid="card" data-cardid="412"
+                        <div class="vd-g-col vd-g-xs-12 vd-g-s-12 vd-g-m-12 vd-g-l-8 vd-pb6">
+                          <!-- <div data-testid="card" data-cardid="412"
                           class="PJLV vd-card vd-flex vd-flex--column vd-pa6 ds-card-container ds-card-column">
                           <div class="vd-g-row ds-recommendation vd-g-row--gutter">
                             <div class="vd-g-col vd-g-xs-12 vd-g-s-6 vd-g-m-6 ds-recommendation-image-container"
@@ -859,22 +973,25 @@
                             </div>
                           </div>
                         </div> -->
-                      </div>
+                        </div>
 
-                      
-                      <div class="vd-g-col vd-g-xs-12 vd-g-s-6 vd-g-m-6 vd-g-l-4 vd-pb6">
-                        <div data-testid="card" data-cardid="500"
-                          class="PJLV vd-card vd-flex vd-flex--column vd-pa6 ds-card-container ds-card-column">
-                          <div class="vd-flex vd-flex--column"><span
-                              class="vd-text-signpost vd-util-text-overflow-break-word signpost-text">Gross
-                              profit</span>
-                            <h2 class="vd-text-heading vd-mt2 ds-card-label" role="heading" aria-level="2">$49,685.34
-                            </h2><span
-                              class="vd-text-supplementary vd-util-text-overflow-break-word vd-mt1 ds-card-label">$6,518.38
-                              more than this time last month</span>
-                            <div class="vd-mt5 vd-pr2 vd-flex vd-flex--column vd-flex--justify-between">
-                              <div class="ds-line-chart">
-                                <!-- <div class="vd-line-graph-container" style="width: 100%; height: 100%;"><svg
+                        <div class="vd-g-col vd-g-xs-12 vd-g-s-6 vd-g-m-6 vd-g-l-4 vd-pb6">
+                          <div data-testid="card" data-cardid="500"
+                            class="PJLV vd-card vd-flex vd-flex--column vd-pa6 ds-card-container ds-card-column">
+                            <div class="vd-flex vd-flex--column">
+                              <span class="vd-text-signpost vd-util-text-overflow-break-word signpost-text">Gross
+                                profit</span>
+                              <h2 class="vd-text-heading vd-mt2 ds-card-label" role="heading" aria-level="2"
+                                id="grossProfit">
+                                $49,685.34
+                              </h2>
+                              <span class="vd-text-supplementary vd-util-text-overflow-break-word vd-mt1 ds-card-label"
+                                id="grossProfitDelta">$6,518.38
+                                more than this time last
+                                month</span>
+                              <div class="vd-mt5 vd-pr2 vd-flex vd-flex--column vd-flex--justify-between">
+                                <div class="ds-line-chart">
+                                  <!-- <div class="vd-line-graph-container" style="width: 100%; height: 100%;"><svg
                                     preserveAspectRatio="xMinYMid" class="vd-line-chart" height="150" width="285">
                                     <g transform="translate(35, 3)" class="vd-line-chart-canvas">
                                       <rect class="vd-background" fill="transparent" height="0" width="0"></rect>
@@ -1069,409 +1186,707 @@
                                       </g>
                                     </g>
                                   </svg></div> -->
-                              </div><a class="vd-link"
-                                href="#"
-                                data-track="view-report">View report</a>
+                                </div>
+                                <a class="vd-link" href="#" data-track="view-report">View report</a>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      
-                    
-                      <div class="vd-g-col vd-g-xs-12 vd-g-s-6 vd-g-m-6 vd-g-l-4 vd-pb6">
-                        <div data-testid="card" data-cardid="406"
-                          class="PJLV vd-card vd-flex vd-flex--column vd-pa6 ds-card-container ds-card-column">
-                          <div class="ds-recommendation-image-container ds-recommendation-image-container--single"
-                            data-testid="card-image">
-                            <picture>
-                              <source media="(max-width: 480px)"
-                                srcset="//vendfrontendassets.freetls.fastly.net/images/dashboards/optimise-inventory-mobile-v1.webp">
-                              <img class="ds-recommendation-image ds-recommendation-image--single"
-                                src="//vendfrontendassets.freetls.fastly.net/images/dashboards/optimise-inventory-mobile-v1.webp"
-                                alt="">
-                            </picture>
+
+                        <div class="vd-g-col vd-g-xs-12 vd-g-s-6 vd-g-m-6 vd-g-l-4 vd-pb6">
+                          <div data-testid="card" data-cardid="406"
+                            class="PJLV vd-card vd-flex vd-flex--column vd-pa6 ds-card-container ds-card-column">
+                            <div class="ds-recommendation-image-container ds-recommendation-image-container--single"
+                              data-testid="card-image">
+                              <picture>
+                                <source media="(max-width: 480px)" srcset="
+                                      //vendfrontendassets.freetls.fastly.net/images/dashboards/optimise-inventory-mobile-v1.webp
+                                    " />
+                                <img class="ds-recommendation-image ds-recommendation-image--single"
+                                  src="//vendfrontendassets.freetls.fastly.net/images/dashboards/optimise-inventory-mobile-v1.webp"
+                                  alt="" />
+                              </picture>
+                            </div>
+                            <div>
+                              <h3 class="vd-text-heading vd-pb4" role="heading" aria-level="3">
+                                Optimize your inventory
+                              </h3>
+                            </div>
+                            <div class="ds-recommendation-actions--single ds-recommendation-actions--with-icon">
+                              <button data-track="action" type="button" class="vd-btn vd-btn--icon-go">
+                                <i class="fa fa-archive vd-icon vd-mr2"></i><span>Go to Stock
+                                  control</span></button><button data-track="dismiss" type="button"
+                                class="vd-btn vd-btn--icon-supplementary">
+                                <i class="fa fa-clock-o vd-icon vd-mr2"></i><span>Not now</span>
+                              </button>
+                            </div>
                           </div>
-                          <div>
-                            <h3 class="vd-text-heading vd-pb4" role="heading" aria-level="3">Optimize your inventory
-                            </h3>
-                          </div>
-                          <div class="ds-recommendation-actions--single ds-recommendation-actions--with-icon"><button
-                              data-track="action" type="button" class="vd-btn vd-btn--icon-go"><i
-                                class="fa fa-archive vd-icon vd-mr2"></i><span>Go to Stock
-                                control</span></button><button data-track="dismiss" type="button"
-                              class="vd-btn vd-btn--icon-supplementary"><i
-                                class="fa fa-clock-o vd-icon vd-mr2"></i><span>Not now</span></button></div>
                         </div>
-                      </div>
-                      <div class="vd-g-col vd-g-xs-12 vd-g-s-12 vd-g-m-12 vd-g-l-8 vd-pb6">
-                        <div data-testid="card" data-cardid="300"
-                          class="PJLV vd-card vd-flex vd-flex--column vd-pa6 ds-card-container ds-card-column">
-                          <div class="vd-flex vd-flex--column vd-flex--justify-start ds-card-container">
-                            <div class="vd-flex vd-flex--column"><span
-                                class="vd-text-signpost vd-util-text-overflow-break-word signpost-text">Top products
-                                sold</span>
-                              <div class="vd-mt3">
-                                <div class="">
-                                  <div class="vd-tabs" role="tablist">
-                                    <div class="vd-tab vd-tab--active" data-track="quantity"><button
-                                        class="vd-tab-button" type="button" role="tab"
-                                        data-testid="tab-button-topbycount">By quantity</button></div>
-                                    <div class="vd-tab" data-track="revenue"><button class="vd-tab-button"
-                                        type="button" role="tab" data-testid="tab-button-topbyrevenue">By
-                                        revenue</button></div>
+                        <div class="vd-g-col vd-g-xs-12 vd-g-s-12 vd-g-m-12 vd-g-l-8 vd-pb6">
+                          <div data-testid="card" data-cardid="300"
+                            class="PJLV vd-card vd-flex vd-flex--column vd-pa6 ds-card-container ds-card-column">
+                            <div class="vd-flex vd-flex--column vd-flex--justify-start ds-card-container">
+                              <div class="vd-flex vd-flex--column">
+                                <span class="vd-text-signpost vd-util-text-overflow-break-word signpost-text">Top
+                                  products sold</span>
+                                <div class="vd-mt3" id="topProductsByQty">
+                                  <div class="">
+                                    <div class="vd-tabs" role="tablist">
+                                      <div class="vd-tab vd-tab--active" data-track="quantity">
+                                        <button class="vd-tab-button" type="button" role="tab"
+                                          data-testid="tab-button-topbycount">
+                                          By quantity
+                                        </button>
+                                      </div>
+                                      <div class="vd-tab" data-track="revenue">
+                                        <button class="vd-tab-button" type="button" role="tab"
+                                          data-testid="tab-button-topbyrevenue">
+                                          By revenue
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="vd-flex vd-flex--row vd-flex--justify-between vd-mt2 ds-card-badge">
+                                    <div class="vd-id-badge vd-id-badge--small">
+                                      <div class="vd-id-badge__image" data-testid="badgeImage" style="
+                                            background-image: url('https://vendimageuploadcdn.global.ssl.fastly.net/160,fit,q90/vend-images/product/original/d1b62d06df41f8e4e54a0eb44c4165dd24ccfebc/Glove-Images--67-.png');
+                                            background-color: transparent;
+                                          "></div>
+                                      <div class="vd-id-badge__content">
+                                        <div class="vd-id-badge__header-title" data-testid="badgeHeader">
+                                          Glove Clip / Multi Colors
+                                        </div>
+                                        <div class="vd-id-badge__description" data-testid="badgeDescription">
+                                          941
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <span class="vd-ml6 vd-mt2">100</span>
+                                  </div>
+                                  <div class="vd-flex vd-flex--row vd-flex--justify-between vd-mt2 ds-card-badge">
+                                    <div class="vd-id-badge vd-id-badge--small">
+                                      <div class="vd-id-badge__image" data-testid="badgeImage" style="
+                                            background-image: url('https://vendimageuploadcdn.global.ssl.fastly.net/160,fit,q90/vend-images/product/original/97cbc46554234f34ac02d01c74a19dcf41537448/Glove-Images--39-.png');
+                                            background-color: transparent;
+                                          "></div>
+                                      <div class="vd-id-badge__content">
+                                        <div class="vd-id-badge__header-title" data-testid="badgeHeader">
+                                          Palmer Safety PS360 Leather (Cut A6,
+                                          Impact 2, Abrasion 2, Puncture 4) /
+                                          XL
+                                        </div>
+                                        <div class="vd-id-badge__description" data-testid="badgeDescription">
+                                          8296
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <span class="vd-ml6 vd-mt2">69</span>
+                                  </div>
+                                  <div class="vd-flex vd-flex--row vd-flex--justify-between vd-mt2 ds-card-badge">
+                                    <div class="vd-id-badge vd-id-badge--small">
+                                      <div class="vd-id-badge__image" data-testid="badgeImage" style="
+                                            background-image: url('https://vendimageuploadcdn.global.ssl.fastly.net/160,fit,q90/vend-images/product/original/97cbc46554234f34ac02d01c74a19dcf41537448/Glove-Images--39-.png');
+                                            background-color: transparent;
+                                          "></div>
+                                      <div class="vd-id-badge__content">
+                                        <div class="vd-id-badge__header-title" data-testid="badgeHeader">
+                                          Palmer Safety PS360 Leather (Cut A6,
+                                          Impact 2, Abrasion 2, Puncture 4) /
+                                          L
+                                        </div>
+                                        <div class="vd-id-badge__description" data-testid="badgeDescription">
+                                          8295
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <span class="vd-ml6 vd-mt2">66</span>
                                   </div>
                                 </div>
-                                <div class="vd-flex vd-flex--row vd-flex--justify-between vd-mt2 ds-card-badge">
-                                  <div class="vd-id-badge vd-id-badge--small">
-                                    <div class="vd-id-badge__image" data-testid="badgeImage"
-                                      style="background-image: url(&quot;https://vendimageuploadcdn.global.ssl.fastly.net/160,fit,q90/vend-images/product/original/d1b62d06df41f8e4e54a0eb44c4165dd24ccfebc/Glove-Images--67-.png&quot;); background-color: transparent;">
-                                    </div>
-                                    <div class="vd-id-badge__content">
-                                      <div class="vd-id-badge__header-title" data-testid="badgeHeader">Glove Clip /
-                                        Multi Colors</div>
-                                      <div class="vd-id-badge__description" data-testid="badgeDescription">941</div>
-                                    </div>
-                                  </div><span class="vd-ml6 vd-mt2">100</span>
-                                </div>
-                                <div class="vd-flex vd-flex--row vd-flex--justify-between vd-mt2 ds-card-badge">
-                                  <div class="vd-id-badge vd-id-badge--small">
-                                    <div class="vd-id-badge__image" data-testid="badgeImage"
-                                      style="background-image: url(&quot;https://vendimageuploadcdn.global.ssl.fastly.net/160,fit,q90/vend-images/product/original/97cbc46554234f34ac02d01c74a19dcf41537448/Glove-Images--39-.png&quot;); background-color: transparent;">
-                                    </div>
-                                    <div class="vd-id-badge__content">
-                                      <div class="vd-id-badge__header-title" data-testid="badgeHeader">Palmer Safety
-                                        PS360 Leather (Cut A6, Impact 2, Abrasion 2, Puncture 4) / XL</div>
-                                      <div class="vd-id-badge__description" data-testid="badgeDescription">8296</div>
-                                    </div>
-                                  </div><span class="vd-ml6 vd-mt2">69</span>
-                                </div>
-                                <div class="vd-flex vd-flex--row vd-flex--justify-between vd-mt2 ds-card-badge">
-                                  <div class="vd-id-badge vd-id-badge--small">
-                                    <div class="vd-id-badge__image" data-testid="badgeImage"
-                                      style="background-image: url(&quot;https://vendimageuploadcdn.global.ssl.fastly.net/160,fit,q90/vend-images/product/original/97cbc46554234f34ac02d01c74a19dcf41537448/Glove-Images--39-.png&quot;); background-color: transparent;">
-                                    </div>
-                                    <div class="vd-id-badge__content">
-                                      <div class="vd-id-badge__header-title" data-testid="badgeHeader">Palmer Safety
-                                        PS360 Leather (Cut A6, Impact 2, Abrasion 2, Puncture 4) / L</div>
-                                      <div class="vd-id-badge__description" data-testid="badgeDescription">8295</div>
-                                    </div>
-                                  </div><span class="vd-ml6 vd-mt2">66</span>
-                                </div>
-                              </div><a class="vd-link vd-mt2"
-                                href="#"
-                                data-track="view-report">View report</a>
+                                <a class="vd-link vd-mt2" href="#" data-track="view-report">View report</a>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="vd-g-col vd-g-s-12 vd-g-m-3 vd-g-l-3">
-                  <div class="ds-things">
-                    <div><span class="vd-text-signpost vd-util-text-overflow-break-word ds-things-header">Things to
-                        do</span></div>
-                    <div data-cardid="200" class="PJLV vd-card vd-flex vd-flex--column vd-pa6 vd-mb6 vd-ml0"><span
-                        class="vd-text-signpost vd-util-text-overflow-break-word signpost-text">Purchase orders</span>
-                      <div class="vd-flex vd-flex--column vd-pt6 vd-pr2"><span
-                          class="vd-text-body vd-util-text-overflow-break-word">You have 4 sent orders waiting to be
-                          received</span></div><a class="vd-link vd-mt3 vd-pr4"
-                        href="#" data-track="view">View sent
-                        orders</a>
+                  <div class="vd-g-col vd-g-s-12 vd-g-m-3 vd-g-l-3">
+                    <div class="ds-things">
+                      <div>
+                        <span class="vd-text-signpost vd-util-text-overflow-break-word ds-things-header">Things to
+                          do</span>
+                      </div>
+                      <div data-cardid="200" class="PJLV vd-card vd-flex vd-flex--column vd-pa6 vd-mb6 vd-ml0">
+                        <span class="vd-text-signpost vd-util-text-overflow-break-word signpost-text">Purchase
+                          orders</span>
+                        <div class="vd-flex vd-flex--column vd-pt6 vd-pr2">
+                          <span class="vd-text-body vd-util-text-overflow-break-word">You have 4 sent orders waiting to
+                            be
+                            received</span>
+                        </div>
+                        <a class="vd-link vd-mt3 vd-pr4" href="#" data-track="view">View sent orders</a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
-          <section class="PJLV vd-section">
-            <div class="PJLV vd-section-wrap">
-              <div class="vd-g-row vd-pt4 vd-pb5 vd-g-row--gutter">
-                <div class="vd-g-col vd-g-s-12 vd-g-m-6 vd-pt5">
-                  <h2 class="vd-text-sub-heading" role="heading" aria-level="2">Product reports</h2>
-                  <hr class="vd-hr vd-mb3 vd-mt3">
-                  <div class="vd-g-row vd-g-row--gutter">
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-product-report">Popular products</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-product-report">Product sales by user</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-product-report">Product sales by type</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-product-report">Product sales by category</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-product-report">Product sales by outlet</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-product-report">Product sales by customer group</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-product-report">Product sales by supplier</a></div>
+            </section>
+            <section class="PJLV vd-section">
+              <div class="PJLV vd-section-wrap">
+                <div class="vd-g-row vd-pt4 vd-pb5 vd-g-row--gutter">
+                  <div class="vd-g-col vd-g-s-12 vd-g-m-6 vd-pt5">
+                    <h2 class="vd-text-sub-heading" role="heading" aria-level="2">
+                      Product reports
+                    </h2>
+                    <hr class="vd-hr vd-mb3 vd-mt3" />
+                    <div class="vd-g-row vd-g-row--gutter">
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-product-report">Popular
+                          products</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-product-report">Product sales
+                          by user</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-product-report">Product sales
+                          by type</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-product-report">Product sales
+                          by category</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-product-report">Product sales
+                          by outlet</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-product-report">Product sales
+                          by customer group</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-product-report">Product sales
+                          by supplier</a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="vd-g-col vd-g-s-12 vd-g-m-6 vd-pt5">
-                  <h2 class="vd-text-sub-heading" role="heading" aria-level="2">Sales reports</h2>
-                  <hr class="vd-hr vd-mb3 vd-mt3">
-                  <div class="vd-g-row vd-g-row--gutter">
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-sales-report">Sales totals by period</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-sales-report">Sales totals by month</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-sales-report">Sales totals by day</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-sales-report">Sales activity by hour</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-sales-report">Sales by tag</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-sales-report">Payment types by month</a></div>
+                  <div class="vd-g-col vd-g-s-12 vd-g-m-6 vd-pt5">
+                    <h2 class="vd-text-sub-heading" role="heading" aria-level="2">
+                      Sales reports
+                    </h2>
+                    <hr class="vd-hr vd-mb3 vd-mt3" />
+                    <div class="vd-g-row vd-g-row--gutter">
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-sales-report">Sales totals by
+                          period</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-sales-report">Sales totals by
+                          month</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-sales-report">Sales totals by
+                          day</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-sales-report">Sales activity
+                          by hour</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-sales-report">Sales by tag</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-sales-report">Payment types by
+                          month</a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="vd-g-col vd-g-s-12 vd-g-m-6 vd-pt5">
-                  <h2 class="vd-text-sub-heading" role="heading" aria-level="2">Inventory reports</h2>
-                  <hr class="vd-hr vd-mb3 vd-mt3">
-                  <div class="vd-g-row vd-g-row--gutter">
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-inventory-report">Stock levels</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-inventory-report">Low stock</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-inventory-report">Stock on hand</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-inventory-report">Out of stock</a></div>
-                    <div class="vd-g-col vd-g-s-6 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#"
-                        data-track="bottom-inventory-report">Product performance</a></div>
+                  <div class="vd-g-col vd-g-s-12 vd-g-m-6 vd-pt5">
+                    <h2 class="vd-text-sub-heading" role="heading" aria-level="2">
+                      Inventory reports
+                    </h2>
+                    <hr class="vd-hr vd-mb3 vd-mt3" />
+                    <div class="vd-g-row vd-g-row--gutter">
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-inventory-report">Stock
+                          levels</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-inventory-report">Low
+                          stock</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-inventory-report">Stock on
+                          hand</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-inventory-report">Out of
+                          stock</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-6 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-inventory-report">Product
+                          performance</a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="vd-g-col vd-g-s-6 vd-g-m-3 vd-pt5">
-                  <h2 class="vd-text-sub-heading" role="heading" aria-level="2">Register reports</h2>
-                  <hr class="vd-hr vd-mb3 vd-mt3">
-                  <div class="vd-g-row vd-g-row--gutter">
-                    <div class="vd-g-col vd-g-s-12 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#" data-track="bottom-register-report">Register closures</a></div>
+                  <div class="vd-g-col vd-g-s-6 vd-g-m-3 vd-pt5">
+                    <h2 class="vd-text-sub-heading" role="heading" aria-level="2">
+                      Register reports
+                    </h2>
+                    <hr class="vd-hr vd-mb3 vd-mt3" />
+                    <div class="vd-g-row vd-g-row--gutter">
+                      <div class="vd-g-col vd-g-s-12 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-register-report">Register
+                          closures</a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="vd-g-col vd-g-s-6 vd-g-m-3 vd-pt5">
-                  <h2 class="vd-text-sub-heading" role="heading" aria-level="2">Other reports</h2>
-                  <hr class="vd-hr vd-mb3 vd-mt3">
-                  <div class="vd-g-row vd-g-row--gutter">
-                    <div class="vd-g-col vd-g-s-12 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#" data-track="bottom-other-report">Gift card</a></div>
-                    <div class="vd-g-col vd-g-s-12 vd-pb3"><a class="vd-link vd-link--secondary"
-                        href="#" data-track="bottom-other-report">Store credit</a></div>
+                  <div class="vd-g-col vd-g-s-6 vd-g-m-3 vd-pt5">
+                    <h2 class="vd-text-sub-heading" role="heading" aria-level="2">
+                      Other reports
+                    </h2>
+                    <hr class="vd-hr vd-mb3 vd-mt3" />
+                    <div class="vd-g-row vd-g-row--gutter">
+                      <div class="vd-g-col vd-g-s-12 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-other-report">Gift card</a>
+                      </div>
+                      <div class="vd-g-col vd-g-s-12 vd-pb3">
+                        <a class="vd-link vd-link--secondary" href="#" data-track="bottom-other-report">Store credit</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
-        </div>
-      </section>
-    </div>
-  </main>
-</div>
-<div class="vd-modals-container"></div>
-<div class="vd-options-manager"></div>
-<div class="vd-toast-container" aria-live="polite">
-  <div class="vd-toast-notification-container"></div>
-</div>
-<import-map-overrides-full show-when-local-storage="devtools"></import-map-overrides-full>
-<iframe id="cz-clean-room" src="about:blank" width="0" height="0" style="display: none;"></iframe>
-<script
-  type="text/javascript">(function () {        var g = function (e, h, f, g) {          this.get = function (a) { for (var a = a + "=", c = document.cookie.split(";"), b = 0, e = c.length; b < e; b++) { for (var d = c[b]; " " == d.charAt(0);)d = d.substring(1, d.length); if (0 == d.indexOf(a)) return d.substring(a.length, d.length) } return null };          this.set = function (a, c) { var b = "", b = new Date; b.setTime(b.getTime() + 6048E5); b = "; expires=" + b.toGMTString(); document.cookie = a + "=" + c + b + "; path=/; " };          this.check = function () { var a = this.get(f); if (a) a = a.split(":"); else if (100 != e) "v" == h && (e = Math.random() >= e / 100 ? 0 : 100), a = [h, e, 0], this.set(f, a.join(":")); else return !0; var c = a[1]; if (100 == c) return !0; switch (a[0]) { case "v": return !1; case "r": return c = a[2] % Math.floor(100 / c), a[2]++, this.set(f, a.join(":")), !c }return !0 };          this.go = function () { if (this.check()) { var a = document.createElement("script"); a.type = "text/javascript"; a.src = g; document.body && document.body.appendChild(a) } };          this.start = function () { var t = this; "complete" !== document.readyState ? window.addEventListener ? window.addEventListener("load", function () { t.go() }, !1) : window.attachEvent && window.attachEvent("onload", function () { t.go() }) : t.go() };        };        try { (new g(100, "r", "QSI_S_ZN_0THkgHxrnxZ30do", "https://zn0thkghxrnxz30do-lightspeedhq.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_0THkgHxrnxZ30do")).start() } catch (i) { }      })();</script>
-<script type="text/javascript"
-  src="https://zn0thkghxrnxz30do-lightspeedhq.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_0THkgHxrnxZ30do"></script>
-<div id="ZN_0THkgHxrnxZ30do"><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
-<div id="cz_transBG" class="cz-transBG">
-  <div id="cz_popover" class="cz-popover"> <span class="cz-popover-close cz-close-popover-trigger"> <img
-        src="data:image/png;base64,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"
-        style="display:none !important;" inline=""> </span>
-    <div id="cz_popover_content"></div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </main>
   </div>
-</div>
-<iframe id="intercom-frame"
-  style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;"
-  aria-hidden="true" tabindex="-1" title="Intercom"></iframe>
-<div class="intercom-lightweight-app">
-  <style id="intercom-lightweight-app-style" type="text/css">
-    @keyframes intercom-lightweight-app-launcher {
-      from {
-        opacity: 0;
-        transform: scale(0.5);
+  <div class="vd-modals-container"></div>
+  <div class="vd-options-manager"></div>
+  <div class="vd-toast-container" aria-live="polite">
+    <div class="vd-toast-notification-container" id="toastHost"></div>
+  </div>
+  <import-map-overrides-full show-when-local-storage="devtools"></import-map-overrides-full>
+  <iframe id="cz-clean-room" src="about:blank" width="0" height="0" style="display: none"></iframe>
+  <script type="text/javascript">
+      ; (function () {
+        var g = function (e, h, f, g) {
+          this.get = function (a) {
+            for (
+              var a = a + '=',
+              c = document.cookie.split(';'),
+              b = 0,
+              e = c.length;
+              b < e;
+              b++
+            ) {
+              for (var d = c[b]; ' ' == d.charAt(0);)
+                d = d.substring(1, d.length)
+              if (0 == d.indexOf(a)) return d.substring(a.length, d.length)
+            }
+            return null
+          }
+          this.set = function (a, c) {
+            var b = '',
+              b = new Date()
+            b.setTime(b.getTime() + 6048e5)
+            b = '; expires=' + b.toGMTString()
+            document.cookie = a + '=' + c + b + '; path=/; '
+          }
+          this.check = function () {
+            var a = this.get(f)
+            if (a) a = a.split(':')
+            else if (100 != e)
+              'v' == h && (e = Math.random() >= e / 100 ? 0 : 100),
+                (a = [h, e, 0]),
+                this.set(f, a.join(':'))
+            else return !0
+            var c = a[1]
+            if (100 == c) return !0
+            switch (a[0]) {
+              case 'v':
+                return !1
+              case 'r':
+                return (
+                  (c = a[2] % Math.floor(100 / c)),
+                  a[2]++,
+                  this.set(f, a.join(':')),
+                  !c
+                )
+            }
+            return !0
+          }
+          this.go = function () {
+            if (this.check()) {
+              var a = document.createElement('script')
+              a.type = 'text/javascript'
+              a.src = g
+              document.body && document.body.appendChild(a)
+            }
+          }
+          this.start = function () {
+            var t = this
+            'complete' !== document.readyState
+              ? window.addEventListener
+                ? window.addEventListener(
+                  'load',
+                  function () {
+                    t.go()
+                  },
+                  !1
+                )
+                : window.attachEvent &&
+                window.attachEvent('onload', function () {
+                  t.go()
+                })
+              : t.go()
+          }
+        }
+        try {
+          new g(
+            100,
+            'r',
+            'QSI_S_ZN_0THkgHxrnxZ30do',
+            'https://zn0thkghxrnxz30do-lightspeedhq.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_0THkgHxrnxZ30do'
+          ).start()
+        } catch (i) { }
+      })()
+  </script>
+  <script type="text/javascript"
+    src="https://zn0thkghxrnxz30do-lightspeedhq.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_0THkgHxrnxZ30do"></script>
+  <div id="ZN_0THkgHxrnxZ30do"><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+  <div id="cz_transBG" class="cz-transBG">
+    <div id="cz_popover" class="cz-popover">
+      <span class="cz-popover-close cz-close-popover-trigger">
+        <img
+          src="data:image/png;base64,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"
+          style="display: none !important" inline="" />
+      </span>
+      <div id="cz_popover_content"></div>
+    </div>
+  </div>
+  <iframe id="intercom-frame" style="
+        position: absolute !important;
+        opacity: 0 !important;
+        width: 1px !important;
+        height: 1px !important;
+        top: 0 !important;
+        left: 0 !important;
+        border: none !important;
+        display: block !important;
+        z-index: -1 !important;
+        pointer-events: none;
+      " aria-hidden="true" tabindex="-1" title="Intercom"></iframe>
+  <div class="intercom-lightweight-app">
+    <style id="intercom-lightweight-app-style" type="text/css">
+      @keyframes intercom-lightweight-app-launcher {
+        from {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
-      to {
-        opacity: 1;
-        transform: scale(1);
+
+      @keyframes intercom-lightweight-app-gradient {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
       }
-    }
-    @keyframes intercom-lightweight-app-gradient {
-      from {
-        opacity: 0;
+
+      @keyframes intercom-lightweight-app-messenger {
+        0% {
+          opacity: 0;
+          transform: scale(0);
+        }
+
+        40% {
+          opacity: 1;
+        }
+
+        100% {
+          transform: scale(1);
+        }
       }
-      to {
-        opacity: 1;
-      }
-    }
-    @keyframes intercom-lightweight-app-messenger {
-      0% {
-        opacity: 0;
-        transform: scale(0);
-      }
-      40% {
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-    .intercom-lightweight-app {
-      position: fixed;
-      z-index: 2147483001;
-      width: 0;
-      height: 0;
-      font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
-    }
-    .intercom-lightweight-app-gradient {
-      position: fixed;
-      z-index: 2147483002;
-      width: 500px;
-      height: 500px;
-      bottom: 0;
-      right: 0;
-      pointer-events: none;
-      background: radial-gradient(ellipse at bottom right,
-          rgba(29, 39, 54, 0.16) 0%,
-          rgba(29, 39, 54, 0) 72%);
-      animation: intercom-lightweight-app-gradient 200ms ease-out;
-    }
-    .intercom-lightweight-app-launcher {
-      position: fixed;
-      z-index: 2147483003;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: none;
-      bottom: 20px;
-      right: 20px;
-      max-width: 48px;
-      width: 48px;
-      max-height: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: #3F32F5;
-      cursor: pointer;
-      box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
-      transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
-      box-sizing: content-box;
-    }
-    .intercom-lightweight-app-launcher:hover {
-      transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
-      transform: scale(1.1)
-    }
-    .intercom-lightweight-app-launcher:active {
-      transform: scale(0.85);
-      transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
-    }
-    .intercom-lightweight-app-launcher:focus {
-      outline: none;
-    }
-    .intercom-lightweight-app-launcher-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 48px;
-      height: 48px;
-      transition: transform 100ms linear, opacity 80ms linear;
-    }
-    .intercom-lightweight-app-launcher-icon-open {
-      opacity: 1;
-      transform: rotate(0deg) scale(1);
-    }
-    .intercom-lightweight-app-launcher-icon-open svg {
-      width: 24px;
-      height: 24px;
-    }
-    .intercom-lightweight-app-launcher-icon-open svg path {
-      fill: rgb(255, 255, 255);
-    }
-    .intercom-lightweight-app-launcher-icon-self-serve {
-      opacity: 1;
-      transform: rotate(0deg) scale(1);
-    }
-    .intercom-lightweight-app-launcher-icon-self-serve svg {
-      height: 44px;
-    }
-    .intercom-lightweight-app-launcher-icon-self-serve svg path {
-      fill: rgb(255, 255, 255);
-    }
-    .intercom-lightweight-app-launcher-custom-icon-open {
-      max-height: 24px;
-      max-width: 24px;
-      opacity: 1;
-      transform: rotate(0deg) scale(1);
-    }
-    .intercom-lightweight-app-launcher-icon-minimize {
-      opacity: 0;
-      transform: rotate(-60deg) scale(0);
-    }
-    .intercom-lightweight-app-launcher-icon-minimize svg path {
-      fill: rgb(255, 255, 255);
-    }
-    .intercom-lightweight-app-messenger {
-      position: fixed;
-      z-index: 2147483003;
-      overflow: hidden;
-      background-color: #ffffff;
-      animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
-      transform-origin: bottom right;
-      width: 400px;
-      height: calc(100% - 40px);
-      max-height: 704px;
-      min-height: 250px;
-      right: 20px;
-      bottom: 20px;
-      box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
-      border-radius: 16px;
-    }
-    .intercom-lightweight-app-messenger-header {
-      height: 64px;
-      border-bottom: none;
-      background: #ffffff;
-    }
-    .intercom-lightweight-app-messenger-footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 80px;
-      background: #ffffff;
-      font-size: 14px;
-      line-height: 21px;
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
-    }
-    @media print {
+
       .intercom-lightweight-app {
-        display: none;
+        position: fixed;
+        z-index: 2147483001;
+        width: 0;
+        height: 0;
+        font-family: intercom-font, 'Helvetica Neue', 'Apple Color Emoji',
+          Helvetica, Arial, sans-serif;
       }
-    }
-  </style>
-</div>
+
+      .intercom-lightweight-app-gradient {
+        position: fixed;
+        z-index: 2147483002;
+        width: 500px;
+        height: 500px;
+        bottom: 0;
+        right: 0;
+        pointer-events: none;
+        background: radial-gradient(ellipse at bottom right,
+            rgba(29, 39, 54, 0.16) 0%,
+            rgba(29, 39, 54, 0) 72%);
+        animation: intercom-lightweight-app-gradient 200ms ease-out;
+      }
+
+      .intercom-lightweight-app-launcher {
+        position: fixed;
+        z-index: 2147483003;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none;
+        bottom: 20px;
+        right: 20px;
+        max-width: 48px;
+        width: 48px;
+        max-height: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: #3f32f5;
+        cursor: pointer;
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06),
+          0 2px 32px 0 rgba(0, 0, 0, 0.16);
+        transition: transform 167ms cubic-bezier(0.33, 0, 0, 1);
+        box-sizing: content-box;
+      }
+
+      .intercom-lightweight-app-launcher:hover {
+        transition: transform 250ms cubic-bezier(0.33, 0, 0, 1);
+        transform: scale(1.1);
+      }
+
+      .intercom-lightweight-app-launcher:active {
+        transform: scale(0.85);
+        transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+      }
+
+      .intercom-lightweight-app-launcher:focus {
+        outline: none;
+      }
+
+      .intercom-lightweight-app-launcher-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 48px;
+        height: 48px;
+        transition: transform 100ms linear, opacity 80ms linear;
+      }
+
+      .intercom-lightweight-app-launcher-icon-open {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      }
+
+      .intercom-lightweight-app-launcher-icon-open svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .intercom-lightweight-app-launcher-icon-open svg path {
+        fill: rgb(255, 255, 255);
+      }
+
+      .intercom-lightweight-app-launcher-icon-self-serve {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      }
+
+      .intercom-lightweight-app-launcher-icon-self-serve svg {
+        height: 44px;
+      }
+
+      .intercom-lightweight-app-launcher-icon-self-serve svg path {
+        fill: rgb(255, 255, 255);
+      }
+
+      .intercom-lightweight-app-launcher-custom-icon-open {
+        max-height: 24px;
+        max-width: 24px;
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      }
+
+      .intercom-lightweight-app-launcher-icon-minimize {
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      }
+
+      .intercom-lightweight-app-launcher-icon-minimize svg path {
+        fill: rgb(255, 255, 255);
+      }
+
+      .intercom-lightweight-app-messenger {
+        position: fixed;
+        z-index: 2147483003;
+        overflow: hidden;
+        background-color: #ffffff;
+        animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+        transform-origin: bottom right;
+        width: 400px;
+        height: calc(100% - 40px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 20px;
+        box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+        border-radius: 16px;
+      }
+
+      .intercom-lightweight-app-messenger-header {
+        height: 64px;
+        border-bottom: none;
+        background: #ffffff;
+      }
+
+      .intercom-lightweight-app-messenger-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 80px;
+        background: #ffffff;
+        font-size: 14px;
+        line-height: 21px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+      }
+
+      @media print {
+        .intercom-lightweight-app {
+          display: none;
+        }
+      }
+    </style>
+  </div>
+  <script>
+      (function () {
+        const ENDPOINTS = {
+          day: "/api/sales/day/",
+          week: "/api/sales/week/",
+          month: "/api/sales/month/"
+        };
+
+        // Element references by ID
+        const els = {
+          totalSales: document.getElementById('totalSales'),
+          salesDelta: document.getElementById('salesDelta'),
+          avgSaleValue: document.getElementById('avgSaleValue'),
+          avgItemsPerSale: document.getElementById('avgItemsPerSale'),
+          grossProfit: document.getElementById('grossProfit'),
+          grossProfitDelta: document.getElementById('grossProfitDelta'),
+          topProductsByQty: document.getElementById('topProductsByQty'),
+          periodSelector: document.getElementById('periodSelector'),
+          toastHost: document.getElementById('toastHost')
+        };
+
+        // Helpers
+        const fmtCurrency = (n) => n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
+        const fmtDeltaSentence = (delta) => {
+          const abs = fmtCurrency(Math.abs(delta));
+          return `That’s ${abs} ${delta >= 0 ? 'more' : 'less'} than this time last period.`;
+        };
+
+        function setLoading(isLoading) {
+          const container = document.body;
+          if (isLoading) {
+            container.style.opacity = '0.6';
+            container.style.pointerEvents = 'none';
+          } else {
+            container.style.opacity = '';
+            container.style.pointerEvents = '';
+          }
+        }
+
+        function renderDashboard(data) {
+          els.totalSales.textContent = fmtCurrency(data.summary.total_sales);
+          els.salesDelta.textContent = fmtDeltaSentence(data.summary.delta_vs_prev);
+          els.avgSaleValue.textContent = fmtCurrency(data.summary.avg_sale_value);
+          els.avgItemsPerSale.textContent = String(data.summary.avg_items_per_sale);
+          els.grossProfit.textContent = fmtCurrency(data.summary.gross_profit);
+          els.grossProfitDelta.textContent = `${fmtCurrency(Math.abs(data.summary.gross_profit_delta))} ${data.summary.gross_profit_delta >= 0 ? 'more' : 'less'} than this time last period`;
+
+          // Render top products
+          els.topProductsByQty.innerHTML = '';
+          data.top_products_by_qty.slice(0, 3).forEach(prod => {
+            const row = document.createElement('div');
+            row.className = 'vd-flex vd-flex--row vd-flex--justify-between vd-mt2 ds-card-badge';
+            row.innerHTML = `
+        <div class="vd-id-badge vd-id-badge--small">
+          <div class="vd-id-badge__image" style="background-image:url('${prod.img}'); background-color:transparent;"></div>
+          <div class="vd-id-badge__content">
+            <div class="vd-id-badge__header-title">${prod.name}</div>
+            <div class="vd-id-badge__description">${prod.sku}</div>
+          </div>
+        </div>
+        <span class="vd-ml6 vd-mt2">${prod.qty}</span>
+      `;
+            els.topProductsByQty.appendChild(row);
+          });
+        }
+
+        function showError() {
+          if (els.toastHost) {
+            const el = document.createElement('div');
+            el.className = 'vd-toast-notification vd-toast-notification--danger';
+            el.textContent = 'Sorry, we couldn’t load the latest stats. Please try again.';
+            els.toastHost.appendChild(el);
+            setTimeout(() => el.remove(), 4000);
+          } else {
+            alert('Failed to load stats.');
+          }
+        }
+
+        async function loadPeriod(period) {
+          try {
+            setLoading(true);
+            const res = await fetch(ENDPOINTS[period], { credentials: 'same-origin' });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            renderDashboard(data);
+          } catch (err) {
+            console.error(err);
+            showError();
+          } finally {
+            setLoading(false);
+          }
+        }
+
+        function init() {
+          els.periodSelector.addEventListener('change', e => {
+            if (e.target.matches('input[data-track]')) {
+              loadPeriod(e.target.getAttribute('data-track'));
+            }
+          });
+
+          // Initial load based on checked radio
+          const checked = els.periodSelector.querySelector('input[data-track]:checked');
+          if (checked) loadPeriod(checked.getAttribute('data-track'));
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+  </script>
+
+
 </body>
+
 </html>

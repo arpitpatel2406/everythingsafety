@@ -1,7 +1,9 @@
 import time
+import json
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from zoneinfo import ZoneInfo
+from collections import Counter, defaultdict
 
 import requests
 from decouple import config
@@ -18,6 +20,8 @@ session.headers.update({
     "Content-Type": "application/json",
     "Accept": "application/json",
 })
+
+DEFAULT_TIMEZONE = "America/New_York"
 
 
 def create_lightspeed_request(
@@ -315,3 +319,339 @@ def get_monthly_sales_report(
     items, urls = _paged_search_sales(date_from_utc, date_to_utc, page_size=page_size)
     
     return _AggregatedResponse(items, urls, status_code=200)
+
+
+# Utility Functions
+def _is_true(v):
+    return (v is True) or (isinstance(v, str) and v.lower() == "true") or (v == 1)
+
+def _money(x):
+    try:
+        return float(x or 0)
+    except Exception:
+        return 0.0
+
+def _to_local_dt(iso_str: str, tzname: str):
+    if not iso_str:
+        return None
+    s = iso_str.replace("Z", "+00:00")
+    try:
+        dt = datetime.fromisoformat(s)
+    except Exception:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(ZoneInfo(tzname))
+
+
+class SalesReportProcessor:
+    """
+    sales report processor that handles daily, weekly, and monthly reports
+    with consistent data processing and response formatting.
+    """
+    
+    def __init__(self, timezone: str = DEFAULT_TIMEZONE):
+        self.timezone = timezone
+        
+    def generate_report(self, period: str, **kwargs) -> dict:
+        """
+        Generate sales report for specified period with dynamic parameters.
+        
+        Args:
+            period (str): 'daily', 'weekly', or 'monthly'
+            **kwargs: Period-specific parameters
+                - daily: date (optional)
+                - weekly: start_date (optional)  
+                - monthly: year (optional), month (optional)
+                
+        Returns:
+            dict: Processed sales report data
+        """
+        try:
+            # Get API response based on period
+            response = self._fetch_sales_data(period, **kwargs)
+            
+            if response.status_code != 200:
+                return {
+                    "error": f"Failed to retrieve {period} sales data",
+                    "status_code": response.status_code
+                }
+            
+            # Process the response data
+            return self._process_sales_data(response, period, **kwargs)
+            
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return {"error": str(e), "status_code": 500}
+    
+    def _fetch_sales_data(self, period: str, **kwargs):
+        """Fetch sales data from appropriate API based on period."""
+        if period == "daily":
+            date = kwargs.get('date')
+            return get_daily_sales_report(date=date, tzname=self.timezone)
+            
+        elif period == "weekly":
+            start_date = kwargs.get('start_date')
+            return get_weekly_sales_report(start_date=start_date, tzname=self.timezone)
+            
+        elif period == "monthly":
+            year = kwargs.get('year')
+            month = kwargs.get('month')
+            return get_monthly_sales_report(year=year, month=month, tzname=self.timezone)
+            
+        else:
+            raise ValueError(f"Invalid period: {period}. Must be 'daily', 'weekly', or 'monthly'")
+    
+    def _process_sales_data(self, response, period: str, **kwargs) -> dict:
+        """Process raw sales data into structured report format."""
+        
+        # Extract and save data
+        data = response.json()
+        with open("data.json", "w") as f:
+            json.dump(data, f, indent=2)
+            
+        sales = data.get("data", [])
+        print(f"Fetched {len(sales)} sales records for {period} report in {self.timezone} timezone.")
+        
+        # Deduplicate by sale ID
+        dedup = {s.get("id"): s for s in sales if s.get("id")}
+        sales_unique = list(dedup.values())
+        
+        # Generate debug counts
+        raw_count = len(sales)
+        unique_count = len(sales_unique)
+        status_counts = Counter(s.get("status") for s in sales_unique)
+        state_counts = Counter(s.get("state") for s in sales_unique)
+        
+        # Filter sales
+        filtered_sales = self._filter_sales(sales_unique)
+        
+        # Process sales data
+        totals, daily_sorted, hourly_sorted, ls_net_sales_sum, ls_net_tax_sum = self._calculate_metrics(
+            filtered_sales, self.timezone
+        )
+        
+        # Build parameters used
+        params_used = self._build_params_used(period, kwargs)
+        
+        # Return structured response
+        return {
+            "params_used": params_used,
+            "raw_count": raw_count,
+            "unique_count": unique_count,
+            "status_counts": dict(status_counts),
+            "state_counts": dict(state_counts),
+            "filtered_count": len(filtered_sales),
+            "totals": self._format_totals(totals),
+            "daily": daily_sorted,
+            "hourly": hourly_sorted,
+            "lightspeed_request_url": getattr(response.request, "url", None),
+            "lightspeed_net_crosscheck": {
+                "sum_sale_total_price": round(ls_net_sales_sum, 2),
+                "sum_sale_total_tax": round(ls_net_tax_sum, 2),
+                "note": "Close to totals.net.sales/tax if you include returns/negatives."
+            },
+            "notes": [
+                "Gross = positive lines only; Returns = negative/is_return lines; Net = Gross + Returns.",
+                "Sale-level filters: exclude SAVED/VOIDED/ONACCOUNT_CLOSED and state=voided.",
+                f"Dates/hours are converted to {self.timezone} BEFORE bucketing.",
+            ]
+        }
+    
+    def _filter_sales(self, sales_unique: list) -> list:
+        """Apply business logic filters to sales data."""
+        filtered_sales = []
+        for s in sales_unique:
+            status = s.get("status")
+            state = s.get("state")
+
+            if status in {"SAVED", "VOIDED"}:
+                continue
+            if status == "ONACCOUNT_CLOSED" and state != "closed":
+                continue
+            if state == "voided":
+                continue
+
+            filtered_sales.append(s)
+        
+        return filtered_sales
+    
+    def _calculate_metrics(self, filtered_sales: list, tzname: str) -> tuple:
+        """Calculate all sales metrics including totals and breakdowns."""
+        
+        # Initialize totals
+        totals = {
+            "gross_sales": 0.0, "returns_sales": 0.0,
+            "gross_tax": 0.0, "returns_tax": 0.0,
+            "gross_cost": 0.0, "returns_cost": 0.0,
+            "gross_profit": 0.0, "returns_profit": 0.0,
+            "total_discount": 0.0,
+            "return_lines_seen": 0,
+            "negative_lines_seen": 0,
+        }
+
+        # Initialize buckets
+        def _blank_bucket():
+            return {
+                "count_sales_gross": 0, "count_sales_net": 0,
+                "gross_sales": 0.0, "gross_tax": 0.0, "gross_cost": 0.0, "gross_profit": 0.0,
+                "returns_sales": 0.0, "returns_tax": 0.0, "returns_cost": 0.0, "returns_profit": 0.0,
+                "net_sales": 0.0, "net_tax": 0.0, "net_cost": 0.0, "net_profit": 0.0,
+            }
+
+        daily_by_date = defaultdict(_blank_bucket)
+        # hourly_by_hour = defaultdict(_blank_bucket)
+
+        # Helper functions
+        def _acc_bucket(bucket, kind, sales_amt, tax_amt, cost_amt):
+            bucket[f"{kind}_sales"] += sales_amt
+            bucket[f"{kind}_tax"] += tax_amt
+            bucket[f"{kind}_cost"] += cost_amt
+            bucket[f"{kind}_profit"] += (sales_amt - cost_amt)
+
+        def _acc_totals(kind, sales_amt, tax_amt, cost_amt):
+            totals[f"{kind}_sales"] += sales_amt
+            totals[f"{kind}_tax"] += tax_amt
+            totals[f"{kind}_cost"] += cost_amt
+            totals[f"{kind}_profit"] += (sales_amt - cost_amt)
+
+        # Cross-check sums
+        ls_net_sales_sum = 0.0
+        ls_net_tax_sum = 0.0
+
+        # Process each sale
+        for s in filtered_sales:
+            ls_net_sales_sum += _money(s.get("total_price"))
+            ls_net_tax_sum += _money(s.get("total_tax"))
+
+            line_items = s.get("line_items") or []
+            local_dt = _to_local_dt(s.get("sale_date") or "", tzname)
+            day = local_dt.strftime("%Y-%m-%d") if local_dt else "unknown"
+            hour = local_dt.strftime("%H") if local_dt else "??"
+
+            b_day = daily_by_date[day]
+            # b_hour = hourly_by_hour[hour]
+
+            had_positive = False
+            had_any = False
+
+            for item in line_items:
+                had_any = True
+                qty = _money(item.get("quantity"))
+                price = _money(item.get("total_price"))
+                tax = _money(item.get("total_tax"))
+                cost = _money(item.get("total_cost"))
+                totals["total_discount"] += _money(item.get("total_discount"))
+
+                is_return = _is_true(item.get("is_return"))
+                is_negative = (qty < 0) or (price < 0) or (tax < 0) or (cost < 0)
+
+                if is_return:
+                    totals["return_lines_seen"] += 1
+                if is_negative:
+                    totals["negative_lines_seen"] += 1
+
+                kind = "returns" if (is_return or is_negative) else "gross"
+
+                # Update buckets and totals
+                _acc_bucket(b_day, kind, price, tax, cost)
+                # _acc_bucket(b_hour, kind, price, tax, cost)
+                _acc_totals(kind, price, tax, cost)
+
+                if kind == "gross":
+                    had_positive = True
+
+            # Update sale counts
+            if had_positive:
+                b_day["count_sales_gross"] += 1
+                # b_hour["count_sales_gross"] += 1
+            if had_any:
+                b_day["count_sales_net"] += 1
+                # b_hour["count_sales_net"] += 1
+
+        # Finalize net calculations
+        def _finalize_bucket(b):
+            b["net_sales"] = b["gross_sales"] + b["returns_sales"]
+            b["net_tax"] = b["gross_tax"] + b["returns_tax"]
+            b["net_cost"] = b["gross_cost"] + b["returns_cost"]
+            b["net_profit"] = b["net_sales"] - b["net_cost"]
+
+        for b in daily_by_date.values():
+            _finalize_bucket(b)
+        # for b in hourly_by_hour.values():
+        #     _finalize_bucket(b)
+
+        # Round and sort buckets
+        def _round_bucket(b):
+            for k, v in list(b.items()):
+                if isinstance(v, float):
+                    b[k] = round(v, 2)
+            return b
+
+        daily_sorted = dict(sorted(((d, _round_bucket(v)) for d, v in daily_by_date.items()), key=lambda x: x[0]))
+        # hourly_sorted = dict(sorted(((h, _round_bucket(v)) for h, v in hourly_by_hour.items()), key=lambda x: x[0]))
+
+        # Round global totals
+        for k in list(totals.keys()):
+            if isinstance(totals[k], float):
+                totals[k] = round(totals[k], 2)
+
+        return totals, daily_sorted, ls_net_sales_sum, ls_net_tax_sum
+    
+    def _format_totals(self, totals: dict) -> dict:
+        """Format totals into structured response format."""
+        totals_net = {
+            "sales": round(totals["gross_sales"] + totals["returns_sales"], 2),
+            "tax": round(totals["gross_tax"] + totals["returns_tax"], 2),
+            "cost": round(totals["gross_cost"] + totals["returns_cost"], 2),
+            "profit": round(
+                (totals["gross_sales"] + totals["returns_sales"])
+                - (totals["gross_cost"] + totals["returns_cost"]), 2
+            ),
+        }
+        
+        return {
+            "gross": {
+                "sales": totals["gross_sales"],
+                "tax": totals["gross_tax"],
+                "cost": totals["gross_cost"],
+                "profit": totals["gross_profit"]
+            },
+            "returns": {
+                "sales": totals["returns_sales"],
+                "tax": totals["returns_tax"],
+                "cost": totals["returns_cost"],
+                "profit": totals["returns_profit"]
+            },
+            "net": totals_net,
+            "total_discount": totals["total_discount"],
+            "return_lines_seen": totals["return_lines_seen"],
+            "negative_lines_seen": totals["negative_lines_seen"],
+        }
+    
+    def _build_params_used(self, period: str, kwargs: dict) -> dict:
+        """Build params_used based on period and provided parameters."""
+        params = {
+            "tz": self.timezone,
+            "period": period
+        }
+        
+        if period == "daily":
+            params["date"] = kwargs.get('date', datetime.now(ZoneInfo(self.timezone)).strftime("%Y-%m-%d"))
+        elif period == "weekly":
+            params["start_date"] = kwargs.get('start_date', datetime.now(ZoneInfo(self.timezone)).strftime("%Y-%m-%d"))
+        elif period == "monthly":
+            now = datetime.now(ZoneInfo(self.timezone))
+            params["year"] = kwargs.get('year', now.year)
+            params["month"] = kwargs.get('month', now.month)
+            
+        return params
+"""
+Professional Sales Report Functions
+Usage Examples:
+- Daily:   processor = SalesReportProcessor(); data = processor.generate_report("daily", date="2025-08-08")
+- Weekly:  processor = SalesReportProcessor(); data = processor.generate_report("weekly", start_date="2025-08-01")
+- Monthly: processor = SalesReportProcessor(); data = processor.generate_report("monthly", year=2025, month=7)
+"""
+
