@@ -235,41 +235,41 @@ def get_weekly_sales_report(
     page_size: int = 1000
     ) -> _AggregatedResponse:
     """
-    Calculates the week period from the start date (or current date if not provided)
-    through the following Sunday, then retrieves all sales data for that period.
-    
-    Args:
-        start_date (str, optional): Start date in YYYY-MM-DD format. If None, uses
-                                   current date in the specified timezone. Defaults to None.
-        tzname (str, optional): timezone name for date interpretation.
-                                Defaults to "America/New_York".
-        page_size (int, optional): Number of items per API page. Defaults to 1000.
-    
-    Note:
-        Week calculation uses Monday=0, Sunday=6. The end date is the next Sunday
-        after the start date (inclusive of the full Sunday).
+    Returns sales data for the week containing the given start_date,
+    starting from Monday and ending on Sunday or today, whichever is earlier.
 
+    Args:
+        start_date (str, optional): Any date in the week (YYYY-MM-DD). Defaults to today.
+        tzname (str, optional): Timezone name. Defaults to "America/New_York".
+        page_size (int, optional): Page size for API calls. Defaults to 1000.
     """
     tz = ZoneInfo(tzname)
-
-    if start_date is None:
-        start_local = datetime.now(tz).replace(
-            hour=0, minute=0, second=0, microsecond=0
-        )
-    else:
-        start_local = datetime.strptime(start_date, "%Y-%m-%d").replace(
-            tzinfo=tz, hour=0, minute=0, second=0, microsecond=0
-        )
-
-    # Calculate how many days until the next Sunday (weekday 6)
-    days_until_sunday = 6 - start_local.weekday()
-    end_local = start_local + timedelta(days=days_until_sunday + 1)  # +1 to make the end time exclusive
-
-    date_from_utc = start_local.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
-    date_to_utc = end_local.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
-
-    items, urls = _paged_search_sales(date_from_utc, date_to_utc, page_size=page_size)
     
+    # Today in the target timezone
+    today_local = datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0)
+
+    # Parse start date or default to today
+    if start_date is None:
+        ref_date = today_local
+    else:
+        ref_date = datetime.strptime(start_date, "%Y-%m-%d").replace(tzinfo=tz, hour=0, minute=0, second=0, microsecond=0)
+
+    # Get Monday of the week
+    week_start = ref_date - timedelta(days=ref_date.weekday())  # Monday = 0
+
+    # Get Sunday of the week
+    week_end = week_start + timedelta(days=6)
+
+    # Clamp the end date to today if Sunday is in the future
+    if week_end > today_local:
+        week_end = today_local
+
+    # Convert to UTC ISO 8601 format
+    date_from_utc = week_start.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+    date_to_utc = (week_end + timedelta(days=1)).astimezone(timezone.utc).isoformat().replace("+00:00", "Z")  # end is exclusive
+
+    # Fetch and return data
+    items, urls = _paged_search_sales(date_from_utc, date_to_utc, page_size=page_size)
     return _AggregatedResponse(items, urls, status_code=200)
 
 
@@ -428,7 +428,7 @@ class SalesReportProcessor:
         filtered_sales = self._filter_sales(sales_unique)
         
         # Process sales data
-        totals, daily_sorted, hourly_sorted, ls_net_sales_sum, ls_net_tax_sum = self._calculate_metrics(
+        totals, daily_sorted, ls_net_sales_sum, ls_net_tax_sum = self._calculate_metrics(
             filtered_sales, self.timezone
         )
         
@@ -445,7 +445,6 @@ class SalesReportProcessor:
             "filtered_count": len(filtered_sales),
             "totals": self._format_totals(totals),
             "daily": daily_sorted,
-            "hourly": hourly_sorted,
             "lightspeed_request_url": getattr(response.request, "url", None),
             "lightspeed_net_crosscheck": {
                 "sum_sale_total_price": round(ls_net_sales_sum, 2),
@@ -456,6 +455,7 @@ class SalesReportProcessor:
                 "Gross = positive lines only; Returns = negative/is_return lines; Net = Gross + Returns.",
                 "Sale-level filters: exclude SAVED/VOIDED/ONACCOUNT_CLOSED and state=voided.",
                 f"Dates/hours are converted to {self.timezone} BEFORE bucketing.",
+                "Gift-card redemptions: any line with non-null gift_card_number is EXCLUDED from sales/tax/cost/profit and reported under excluded_by_giftcard.",
             ]
         }
     
@@ -489,6 +489,10 @@ class SalesReportProcessor:
             "total_discount": 0.0,
             "return_lines_seen": 0,
             "negative_lines_seen": 0,
+            "giftcard_lines_seen": 0,
+            "giftcard_excluded_price": 0.0,
+            "giftcard_excluded_tax": 0.0,
+            "giftcard_excluded_cost": 0.0,
         }
 
         # Initialize buckets
@@ -537,6 +541,12 @@ class SalesReportProcessor:
             had_any = False
 
             for item in line_items:
+                if item.get("gift_card_number"):  # <-- redemption
+                    totals["giftcard_lines_seen"] += 1
+                    totals["giftcard_excluded_price"] += _money(item.get("total_price"))
+                    totals["giftcard_excluded_tax"] += _money(item.get("total_tax"))
+                    totals["giftcard_excluded_cost"] += _money(item.get("total_cost"))
+                    continue
                 had_any = True
                 qty = _money(item.get("quantity"))
                 price = _money(item.get("total_price"))
@@ -628,6 +638,12 @@ class SalesReportProcessor:
             "total_discount": totals["total_discount"],
             "return_lines_seen": totals["return_lines_seen"],
             "negative_lines_seen": totals["negative_lines_seen"],
+            "excluded_by_giftcard": {
+                "lines": totals["giftcard_lines_seen"],
+                "sales": round(totals["giftcard_excluded_price"], 2),
+                "tax": round(totals["giftcard_excluded_tax"], 2),
+                "cost": round(totals["giftcard_excluded_cost"], 2),
+            },
         }
     
     def _build_params_used(self, period: str, kwargs: dict) -> dict:
